@@ -1,0 +1,3 @@
+rootProject.name = 'BankReact'
+
+include ':app'
