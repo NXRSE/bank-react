@@ -18,26 +18,37 @@ const url = 'https://thebankoftoday.com:8443';
 //var BankClient = React.createClass({
 function BankClient() { 
 
-    this._doCallNoAuth = function(route, method, data) {
+    this._doCallNoAuth = function(route, method, data, callback) {
+		var formData = new FormData();
+		for ( var key in data ) {
+			formData.append(key, data[key]);
+		}
+
 		fetch(url+route, {
 		  method: method,
 		  headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		  },
-		  body: JSON.stringify(data)
+		  //body: JSON.stringify(data)
+		  body: formData
 		})
-		.then((response) => response.text())
+		.then((response) => response.json())
 		.then((responseText) => {
-		  console.log(responseText);
+			console.log('Called: '+route);
+			callback(responseText);
 		})
 		.catch((error) => {
-			console.log('test after failure');
-		  console.warn(error);
+			callback(error);
 		});
     },
 
     this._doCallAuth = function(route, method, data, token, callback) {
+		var formData = new FormData();
+		for ( var key in data ) {
+			formData.append(key, data[key]);
+		}
+
 		return fetch(url+route, {
 		  method: method,
 		  headers: {
@@ -45,15 +56,14 @@ function BankClient() {
 			'Content-Type': 'application/json',
 			'X-Auth-Token': token
 		  },
-		  body: JSON.stringify(data)
+		  body: formData
 		})
 		.then((response) => response.json())
 		.then((responseText) => {
 			callback(responseText);
 		})
 		.catch((error) => {
-			console.log('test after failure');
-		  console.warn(error);
+			callback(error);
 		});
     },
 
@@ -70,6 +80,7 @@ function BankClient() {
 	},
 
 	this.accountCreate = function(data, cb) {
+        console.log(JSON.stringify(data));
 		this._doCallNoAuth('/account', 'POST', data, cb);
 	},
 

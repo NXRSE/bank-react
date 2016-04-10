@@ -12,25 +12,35 @@ import React, {
 } from 'react-native';
 
 import Button from 'react-native-button'
+import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
 let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
+let db = require('./libs/RealmDB');  
 
-var LoginView = React.createClass({
+var CreateAuthView = React.createClass({
     getInitialState() {
         return {
             password: ''
         }
     },
 
-    _doLogin: function() {
+    _doCreateAuth: function() {
         //Alert.alert('Password', this.state.password);
-        let data = {User: 'userid', Password: this.state.password};
-        let res = bc.authLogin(data, function(res) {
-            console.log("At the login");
-            console.log(res);
-        });
+        // Get user account number
+        let user = db.objects('Account');
+        // Check if there is a result
+        if (user.length > 0)
+        {
+            // Get first user account
+            let userAccount = user.slice(0,1);
+            let data = {User: userAccount.AccountNumber, Password: this.state.password};
+            let res = bc.authCreate(data, function(res) {
+                console.log("At the login");
+                console.log(res);
+            });
+        }
     },
 
     render: function() {
@@ -46,11 +56,11 @@ var LoginView = React.createClass({
                     autoCapitalize="none"
                     placeholder="Password"
                 />
-                <Button onPress={ this._doLogin }>Click me</Button>
+                <Button onPress={ this._doCreateAuth }>Create Login</Button>
               </View>
             </View>
         )
     }
 });
 
-module.exports = LoginView;
+module.exports = CreateAuthView;

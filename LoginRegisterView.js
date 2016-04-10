@@ -17,6 +17,12 @@ import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-nati
 var styles = require('./styles');
 
 class LoginRegisterView extends Component{
+    componentWillMount() {
+        // Check to see if account created
+        // Check if auth account created
+        // Go to login
+    }
+
     render() {
         return (
             <View style={styles.global.container}>
@@ -27,6 +33,9 @@ class LoginRegisterView extends Component{
                     <Button onPress={Actions.register}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                        style={{fontSize: 20, color: 'green'}}>Go to Register page</Button>
+                    <Button onPress={()=>Actions.main({ title:'Account' })}
+                    containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
+                                       style={{fontSize: 20, color: 'green'}}>Go to Main page</Button>
                 </View>
             </View>
         )
