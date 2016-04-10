@@ -66,13 +66,12 @@ const TransactionsSchema = {
 const ContactsSchema = {
   name: 'Contacts',
   properties: {
-    ContactGivenName:  { type: 'string', indexed: true },
-    ContactFamilyName: { type: 'string', indexed: true },
+    ContactName: { type: 'string', indexed: true },
     ContactAccountNumber: 'string',
     ContactBankNumber: 'string',
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 2 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 3 });
 
 module.exports = realm;

@@ -37,19 +37,6 @@ var MainAccountTabs = React.createClass({
 
     _updateAccount: function() {
         console.log('updating account...');
-        
-        // Get user account number
-        let user = db.objects('Account');
-        // Check if there is a result
-        if (user.length <= 0) {
-            //Error 
-            return;
-        }
-        // @TODO When user has multiple accounts, loop through
-        // Get first user account
-        var userAccount = user.slice(0,1);
-        userAccount = userAccount[0];
-
         // Get latest balances
         let data = {};
         let res = bc.accountGet(data, function(res) {
@@ -62,8 +49,8 @@ var MainAccountTabs = React.createClass({
                     console.log(userAccountDetails.AccountNumber);
                     // Update Main Account
                     let userUpdate = db.objects('Account');
-                    //var userAccountUpdate = userUpdate.filter('AccountNumber = "'+userAccountDetails.AccountNumber+'"');
-                    var userAccountUpdate = userUpdate.slice(0,1);
+                    var userAccountUpdate = userUpdate.filtered('AccountNumber == $0', userAccountDetails.AccountNumber);
+                    //var userAccountUpdate = userUpdate.slice(0,1).first;
                     userAccountUpdate = userAccountUpdate[0];
                     console.log(userAccountUpdate);
 
@@ -75,8 +62,6 @@ var MainAccountTabs = React.createClass({
                     console.log('After the write');
                     console.log(userAccountUpdate);
                 });
-
-                console.log('Finished writing');
             } else {
                 Alert.alert('Error', 'Could not update account details');
                 return;

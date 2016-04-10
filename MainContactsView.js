@@ -8,6 +8,7 @@ import React, {
   StatusBar,
   StyleSheet,
   TextInput,
+  ListView,
   Alert
 } from 'react-native';
 
@@ -20,27 +21,37 @@ let bc = new BankClient();
 let db = require('./libs/RealmDB');  
 
 var MainContactsView = React.createClass({
-    getInitialState() {
+
+    getInitialState: function() {
+        let contacts = db.objects('Contacts');
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return {
-            password: ''
-        }
+            dataSource: ds.cloneWithRows(contacts),
+        };
     },
 
-    _doCreateAuth: function() {
-        //Alert.alert('Password', this.state.password);
-        // Get user account number
-        let user = db.objects('Account');
-        // Check if there is a result
-        if (user.length > 0)
-        {
-            // Get first user account
-            let userAccount = user.slice(0,1);
-            let data = {User: userAccount.AccountNumber, Password: this.state.password};
-            let res = bc.authCreate(data, function(res) {
-                console.log("At the login");
+    componentDidMount: function() {
+        let res = bc.accountGetAll({}, function(res) {
+            if (typeof res.error == 'undefined') {
+                let contacts = JSON.parse(res.response);
+                db.write(() => {
+                    contacts.forEach(function(c) { 
+                        // Check if contact exists
+                        /*
+                        let contactDB = db.objects('Contacts').filtered('ContactName == $0 && ContactAccountNumber == $1 && ContactBankNumber == $2', c.AccountHolderName, c.AccountNumber, c.BankNumber);
+
+                        if (contactDB.length == 0) {
+                            db.create('Contacts', { ContactName: c.AccountHolderName, ContactAccountNumber: c.AccountNumber, ContactBankNumber: c.BankNumber });
+                        }
+                        */
+                    });
+                });
+
+            } else {
+                // Error
                 console.log(res);
-            });
-        }
+            }
+        });
     },
 
     render: function() {
@@ -48,16 +59,10 @@ var MainContactsView = React.createClass({
             <View style={styles.global.container}>
               <View style={styles.global.wrap}>
                 <Text>MAIN CONTACTS</Text>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    autoCorrect={false}
-                    keyboardAppearance="dark"
-                    autoCapitalize="none"
-                    placeholder="Password"
+                <ListView
+                dataSource={this.state.dataSource}
+                renderRow={(rowData) => <Text>{rowData.ContactName}</Text>}
                 />
-                <Button onPress={ this._doCreateAuth }>Create Login</Button>
               </View>
             </View>
         )
