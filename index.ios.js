@@ -46,5 +46,6 @@ var MainAccountTabs = require('./MainAccountTabs');
 
 // DB
 var db = require('./libs/RealmDB');
+//console.log(db.path);
 
 AppRegistry.registerComponent('BankReact', () => BankReact);

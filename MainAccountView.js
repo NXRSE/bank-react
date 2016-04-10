@@ -26,31 +26,19 @@ var MainAccountView = React.createClass({
         }
     },
 
-    _doCreateAuth: function() {
-        //Alert.alert('Password', this.state.password);
-        // Get user account number
-        let user = db.objects('Account');
-        // Check if there is a result
-        if (user.length > 0)
-        {
-            // Get first user account
-            let userAccount = user.slice(0,1);
-            let data = {User: userAccount.AccountNumber, Password: this.state.password};
-            let res = bc.authCreate(data, function(res) {
-                console.log("At the login");
-                console.log(res);
-            });
-        }
-    },
+	componentDidMount: function() {
+		// Observe Realm Change Events
+		db.addListener('change', () => {
+			// Fetch account
+			let user = db.objects('Account');
+			var userAccount = user.slice(0,1);
+			userAccount = userAccount[0];
+			console.log(userAccount.AccountBalance);
+			this.setState({ 'balance' : userAccount.AccountBalance });
+		});
+	},
 
     render: function() {
-        // Fetch account
-        let user = db.objects('Account');
-        var userAccount = user.slice(0,1);
-        userAccount = userAccount[0];
-        console.log('get account in main');
-        console.log(userAccount.AccountBalance);
-        this.state.balance = userAccount.AccountBalance;
 
         return (
             <View style={styles.global.container}>
