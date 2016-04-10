@@ -42,6 +42,7 @@ var LoginView = React.createClass({
             // Repeated logging in will fill up Redis with tokens
             let data = { User: userAccount.AccountNumber, Password: userAccount.Password };
             let res = bc.authLogin(data, function(res) {
+                console.log(res);
                 if (typeof res.error == 'undefined') {
                     // Delete tokens
                     db.write(() => {

@@ -22,7 +22,7 @@ let db = require('./libs/RealmDB');
 var MainAccountView = React.createClass({
     getInitialState() {
         return {
-            password: ''
+            balance: "nil"
         }
     },
 
@@ -44,20 +44,19 @@ var MainAccountView = React.createClass({
     },
 
     render: function() {
+        // Fetch account
+        let user = db.objects('Account');
+        var userAccount = user.slice(0,1);
+        userAccount = userAccount[0];
+        console.log('get account in main');
+        console.log(userAccount.AccountBalance);
+        this.state.balance = userAccount.AccountBalance;
+
         return (
             <View style={styles.global.container}>
               <View style={styles.global.wrap}>
                 <Text>MAIN ACCOUNT</Text>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    autoCorrect={false}
-                    keyboardAppearance="dark"
-                    autoCapitalize="none"
-                    placeholder="Password"
-                />
-                <Button onPress={ this._doCreateAuth }>Create Login</Button>
+                <Text>{this.state.balance}</Text>
               </View>
             </View>
         )
