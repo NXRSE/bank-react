@@ -42,11 +42,7 @@ var LoginRegisterView = require('./LoginRegisterView');
 var LoginView = require('./LoginView');
 var RegisterView = require('./RegisterView');
 var CreateAuthView = require('./CreateAuthView');
-var TabView = require('./TabView');
-var NavigationDrawer = require('./NavigationDrawer');
 var MainAccountTabs = require('./MainAccountTabs');
-// Components
-var TabIcon = require('./TabIcon');
 
 // DB
 var db = require('./libs/RealmDB');

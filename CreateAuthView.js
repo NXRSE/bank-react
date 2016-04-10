@@ -26,6 +26,41 @@ var CreateAuthView = React.createClass({
         }
     },
 
+    doLogin: function() {
+        console.log('Do login called');
+        let userAuth = db.objects('AccountAuth');
+        if (userAuth.length > 0) {
+            var userAccount = userAuth.slice(0,1);
+            userAccount = userAccount[0];
+
+            let data = { User: userAccount.AccountNumber, Password: userAccount.Password };
+            let res = bc.authLogin(data, function(res) {
+                if (typeof res.error == 'undefined') {
+                    console.log(res);
+                    console.log(res.response);
+                    // Delete tokens
+                    let allTokens = db.objects('AccountToken');
+                    db.delete(allTokens); 
+                    // Get token
+                    let token = res.response;
+                    db.write(() => {
+                      db.create('AccountToken', { 
+                          Token: token,
+                          //Timestamp: Math.floor(Date.now())
+                          Timestamp: 1
+                        });
+                    });
+                    // Go to account landing view
+                    Actions.main();
+                } else {
+                    // Show error
+                    Alert.alert('Error', res.error);
+                    return;
+                }
+            });
+        }
+    },
+
     _doCreateAuth: function() {
         //Alert.alert('Password', this.state.password);
         // Get user account number
@@ -34,12 +69,46 @@ var CreateAuthView = React.createClass({
         if (user.length > 0)
         {
             // Get first user account
-            let userAccount = user.slice(0,1);
+            var userAccount = user.slice(0,1);
+            userAccount = userAccount[0];
             let data = {User: userAccount.AccountNumber, Password: this.state.password};
-            let res = bc.authCreate(data, function(res) {
-                console.log("At the login");
-                console.log(res);
-            });
+            let res = bc.authCreate(data, this.authCreateCallback);
+        }
+    },
+
+    authCreateCallback: function(res) {
+        let user = db.objects('Account');
+        // Check if there is a result
+        if (user.length > 0)
+        {
+            // Get first user account
+            var userAccount = user.slice(0,1);
+            userAccount = userAccount[0];
+            let data = {User: userAccount.AccountNumber, Password: this.state.password};
+            console.log(res);
+            if (typeof res.error == 'undefined') {
+                console.log('before insert');
+                // Save account auth details
+                db.write(() => {
+                  db.create('AccountAuth', { 
+                      AccountNumber: data.User,
+                      Password: data.Password,
+                      //Timestamp: Math.floor(Date.now())
+                      Timestamp: 1
+                    });
+                });
+                // Log user in
+                console.log('after insert');
+                this.doLogin();
+            } else if (res.error == 'appauth.CreateUserPassword: Account already exists'){
+                // Log user in
+                console.log('at error, show login');
+                this.doLogin();
+            } else {
+                // Show error
+                Alert.alert('Error', res.error);
+                return;
+            }
         }
     },
 
