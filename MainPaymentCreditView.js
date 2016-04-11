@@ -22,23 +22,30 @@ let db = require('./libs/RealmDB');
 var MainPaymentCreditView = React.createClass({
     getInitialState() {
         return {
-            password: ''
+            paymentAmount: ''
         }
     },
 
-    _doCreateAuth: function() {
-        //Alert.alert('Password', this.state.password);
-        // Get user account number
+    _doPayment: function() {
         let user = db.objects('Account');
-        // Check if there is a result
-        if (user.length > 0)
-        {
-            // Get first user account
-            let userAccount = user.slice(0,1);
-            let data = {User: userAccount.AccountNumber, Password: this.state.password};
-            let res = bc.authCreate(data, function(res) {
-                console.log("At the login");
+        if (user.length > 0) {
+            var userAccount = user.slice(0,1);
+            userAccount = userAccount[0];
+            let data = {
+                SenderDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
+                RecipientDetails: this.props.data.ContactAccountNumer+'@'+this.props.data.ContactBankNumber,
+                Amount: this.state.paymentAmount
+            };
+
+            let res = bc.paymentCredit(data, function(res) {
                 console.log(res);
+                if (typeof res.error == 'undefined') {
+                    Actions.main();
+                } else {
+                    // Show error
+                    Alert.alert('Error', res.error);
+                    return;
+                }
             });
         }
     },
@@ -48,16 +55,17 @@ var MainPaymentCreditView = React.createClass({
             <View style={styles.global.container}>
               <View style={styles.global.wrap}>
                 <Text>MAIN PAYMENTS CREDIT</Text>
+                <Text>Make payment to: {this.props.data.ContactName}</Text>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
+                    onChangeText={(paymentAmount) => this.setState({paymentAmount})}
+                    value={this.state.paymentAmount}
                     autoCorrect={false}
-                    keyboardAppearance="dark"
+                    keyboardType='decimal-pad'
                     autoCapitalize="none"
-                    placeholder="Password"
+                    placeholder="Payment Amount"
                 />
-                <Button onPress={ this._doCreateAuth }>Create Login</Button>
+                <Button onPress={ this._doPayment }>Make Payment</Button>
               </View>
             </View>
         )

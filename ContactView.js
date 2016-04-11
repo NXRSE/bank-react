@@ -31,12 +31,13 @@ var ContactView = React.createClass({
         return (
             <View style={styles.global.container}>
               <View style={styles.global.wrap}>
-                <Text>MAIN ACCOUNT</Text>
+                <Text>MAIN CONTACT</Text>
                 <Text>Contact name: {this.props.data.ContactName}</Text>
                 <Text>Contact Account Number: {this.props.data.ContactAccountNumber}</Text>
                 <Text>Contact Bank Number: {this.props.data.ContactBankNumber}</Text>
 
-                <Button onPress={Actions.paymentCredit}
+                <Button 
+                onPress={ ()=>Actions.paymentCredit({ title:'Payment', data: this.props.data }) }
                 containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                    style={{fontSize: 20, color: 'green'}}>Make payment</Button>
               </View>

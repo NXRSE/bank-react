@@ -22,23 +22,30 @@ let db = require('./libs/RealmDB');
 var MainPaymentDepositView = React.createClass({
     getInitialState() {
         return {
-            password: ''
+            depositAmount: ''
         }
     },
 
-    _doCreateAuth: function() {
-        //Alert.alert('Password', this.state.password);
-        // Get user account number
+    _doDeposit: function() {
         let user = db.objects('Account');
-        // Check if there is a result
-        if (user.length > 0)
-        {
-            // Get first user account
-            let userAccount = user.slice(0,1);
-            let data = {User: userAccount.AccountNumber, Password: this.state.password};
-            let res = bc.authCreate(data, function(res) {
-                console.log("At the login");
+        if (user.length > 0) {
+            var userAccount = user.slice(0,1);
+            userAccount = userAccount[0];
+            let data = {
+                AccountDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
+                Amount: this.state.depositAmount
+            };
+
+            let res = bc.paymentDeposit(data, function(res) {
                 console.log(res);
+                if (typeof res.error == 'undefined') {
+                    console.log('Go to main...');
+                    Actions.main({ selectedTab: 'account' });
+                } else {
+                    // Show error
+                    Alert.alert('Error', res.error);
+                    return;
+                }
             });
         }
     },
@@ -50,14 +57,14 @@ var MainPaymentDepositView = React.createClass({
                 <Text>MAIN PAYMENTS DEPOSIT</Text>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
+                    onChangeText={(depositAmount) => this.setState({depositAmount})}
+                    value={this.state.depositAmount}
                     autoCorrect={false}
-                    keyboardAppearance="dark"
                     autoCapitalize="none"
-                    placeholder="Password"
+                    keyboardType='decimal-pad'
+                    placeholder="Deposit Amount"
                 />
-                <Button onPress={ this._doCreateAuth }>Create Login</Button>
+                <Button onPress={ this._doDeposit }>Deposit</Button>
               </View>
             </View>
         )

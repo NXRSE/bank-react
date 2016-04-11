@@ -10,8 +10,8 @@ var {
 
 var MainAccountView = require('./MainAccountView');
 var MainContactsView = require('./MainContactsView');
-var MainPaymentCreditView = require('./MainPaymentCreditView');
 var MainPaymentDepositView = require('./MainPaymentDepositView');
+var MainSettingsView = require('./MainSettingsView');
 
 let db = require('./libs/RealmDB'); 
 let BankClient = require('./libs/BankClient');
@@ -99,18 +99,6 @@ var MainAccountTabs = React.createClass({
       	<MainContactsView />
           </TabBarIOS.Item>
           <TabBarIOS.Item
-            systemIcon="bookmarks"
-            title="Credit"
-            selected={this.state.selectedTab === 'paymentsCredit'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'paymentsCredit',
-                presses: this.state.presses + 1
-              });
-            }}>
-      	<MainPaymentCreditView />
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
             systemIcon="top-rated"
             title="Deposit"
             selected={this.state.selectedTab === 'paymentsDeposit'}
@@ -121,6 +109,18 @@ var MainAccountTabs = React.createClass({
               });
             }}>
       	<MainPaymentDepositView />
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            systemIcon="bookmarks"
+            title="Settings"
+            selected={this.state.selectedTab === 'settings'}
+            onPress={() => {
+              this.setState({
+                selectedTab: 'settings',
+                presses: this.state.presses + 1
+              });
+            }}>
+      	<MainSettingsView />
           </TabBarIOS.Item>
         </TabBarIOS>
       );
