@@ -19,10 +19,12 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var MainContactsView = React.createClass({
 
     getInitialState: function() {
+        dismissKeyboard();
         let contacts = db.objects('Contacts');
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return {

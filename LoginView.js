@@ -18,9 +18,11 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var LoginView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             password: ''
         }
@@ -59,14 +61,17 @@ var LoginView = React.createClass({
                         });
                     });
                     // Go to account landing view
+                    dismissKeyboard();
                     Actions.main();
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);
+                    dismissKeyboard();
                     return;
                 }
             });
         } else {
+            dismissKeyboard();
             Actions.register();
         }
     },

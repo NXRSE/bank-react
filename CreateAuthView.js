@@ -21,6 +21,7 @@ let db = require('./libs/RealmDB');
 
 var CreateAuthView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             password: ''
         }
@@ -52,10 +53,12 @@ var CreateAuthView = React.createClass({
                         });
                     });
                     // Go to account landing view
+                    dismissKeyboard();
                     Actions.main();
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);
+                    dismissKeyboard();
                     return;
                 }
             });

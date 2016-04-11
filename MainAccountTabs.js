@@ -16,6 +16,7 @@ var MainSettingsView = require('./MainSettingsView');
 let db = require('./libs/RealmDB'); 
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
+let dismissKeyboard = require('dismissKeyboard');
 
 var MainAccountTabs = React.createClass({
     statics: {
@@ -28,6 +29,7 @@ var MainAccountTabs = React.createClass({
     getInitialState: function() {
       // Update balance
       this._updateAccount();
+      dismissKeyboard();
       return {
         selectedTab: 'account',
         notifCount: 0,
@@ -64,6 +66,7 @@ var MainAccountTabs = React.createClass({
                 });
             } else {
                 Alert.alert('Error', 'Could not update account details');
+                dismissKeyboard();
                 return;
             }
         });

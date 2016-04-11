@@ -18,9 +18,11 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var MainPaymentDepositView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             depositAmount: ''
         }
@@ -40,9 +42,11 @@ var MainPaymentDepositView = React.createClass({
                 console.log(res);
                 if (typeof res.error == 'undefined') {
                     console.log('Go to main...');
+                    dismissKeyboard();
                     Actions.main({ selectedTab: 'account' });
                 } else {
                     // Show error
+                    dismissKeyboard();
                     Alert.alert('Error', res.error);
                     return;
                 }

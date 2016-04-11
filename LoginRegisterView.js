@@ -15,6 +15,7 @@ import Button from 'react-native-button'
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
 var styles = require('./styles');
+let dismissKeyboard = require('dismissKeyboard');
 
 class LoginRegisterView extends Component{
     componentWillMount() {
@@ -29,13 +30,10 @@ class LoginRegisterView extends Component{
                 <View style={styles.global.wrap}>
                     <Button onPress={()=>Actions.login({data:"Custom data", title:'Custom title' })}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}>Go to Login page</Button>
+                                       style={{fontSize: 20, color: 'green'}}>Login</Button>
                     <Button onPress={Actions.register}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}>Go to Register page</Button>
-                    <Button onPress={()=>Actions.main({ title:'Account' })}
-                    containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}>Go to Main page</Button>
+                                       style={{fontSize: 20, color: 'green'}}>Register</Button>
                 </View>
             </View>
         )

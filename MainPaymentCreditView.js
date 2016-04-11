@@ -18,9 +18,11 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var MainPaymentCreditView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             paymentAmount: ''
         }
@@ -40,10 +42,12 @@ var MainPaymentCreditView = React.createClass({
             let res = bc.paymentCredit(data, function(res) {
                 console.log(res);
                 if (typeof res.error == 'undefined') {
+                    dismissKeyboard();
                     Actions.main();
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);
+                    dismissKeyboard();
                     return;
                 }
             });

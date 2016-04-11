@@ -18,9 +18,11 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var ContactView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             data: { ContactName: "nil" }
         }

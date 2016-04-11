@@ -17,9 +17,11 @@ var styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');
+let dismissKeyboard = require('dismissKeyboard');
 
 var RegisterView = React.createClass({
     getInitialState() {
+        dismissKeyboard();
         return {
             givenName: '',
             familyName: '',
@@ -76,6 +78,7 @@ var RegisterView = React.createClass({
                 let userAccount = user.filtered('AccountNumber = "'+accountId+'"');
                 console.log('User?');
                 console.log(userAccount);
+                dismissKeyboard();
                 if (userAccount.length == 1) {
                     console.log(userAccount[0]);
                     Actions.createAuth();
@@ -83,6 +86,8 @@ var RegisterView = React.createClass({
                 // Alert token value
                 // Load new page
             } else if (typeof res.error != 'undefined') {
+                dismissKeyboard();
+                Alert.alert('Error', res.error);
                 console.log('Error');
             }
         });
