@@ -38,16 +38,17 @@ var CreateAuthView = React.createClass({
                 if (typeof res.error == 'undefined') {
                     console.log(res);
                     console.log(res.response);
-                    // Delete tokens
-                    let allTokens = db.objects('AccountToken');
-                    db.delete(allTokens); 
                     // Get token
                     let token = res.response;
                     db.write(() => {
-                      db.create('AccountToken', { 
-                          Token: token,
-                          //Timestamp: Math.floor(Date.now())
-                          Timestamp: 1
+                        // Delete tokens
+                        let allTokens = db.objects('AccountToken');
+                        db.delete(allTokens); 
+
+                        db.create('AccountToken', { 
+                           Token: token,
+                           //Timestamp: Math.floor(Date.now())
+                           Timestamp: 1
                         });
                     });
                     // Go to account landing view
@@ -90,11 +91,14 @@ var CreateAuthView = React.createClass({
                 console.log('before insert');
                 // Save account auth details
                 db.write(() => {
-                  db.create('AccountAuth', { 
-                      AccountNumber: data.User,
-                      Password: data.Password,
-                      //Timestamp: Math.floor(Date.now())
-                      Timestamp: 1
+                    let auth = db.objects('AccountAuth');
+                    db.delete(auth);
+
+                    db.create('AccountAuth', { 
+                       AccountNumber: data.User,
+                       Password: data.Password,
+                       //Timestamp: Math.floor(Date.now())
+                       Timestamp: 1
                     });
                 });
                 // Log user in

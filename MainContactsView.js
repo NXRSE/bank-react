@@ -37,13 +37,11 @@ var MainContactsView = React.createClass({
                 db.write(() => {
                     contacts.forEach(function(c) { 
                         // Check if contact exists
-                        /*
                         let contactDB = db.objects('Contacts').filtered('ContactName == $0 && ContactAccountNumber == $1 && ContactBankNumber == $2', c.AccountHolderName, c.AccountNumber, c.BankNumber);
 
                         if (contactDB.length == 0) {
                             db.create('Contacts', { ContactName: c.AccountHolderName, ContactAccountNumber: c.AccountNumber, ContactBankNumber: c.BankNumber });
                         }
-                        */
                     });
                 });
 
@@ -61,7 +59,7 @@ var MainContactsView = React.createClass({
                 <Text>MAIN CONTACTS</Text>
                 <ListView
                 dataSource={this.state.dataSource}
-                renderRow={(rowData) => <Text>{rowData.ContactName}</Text>}
+                renderRow={(rowData) => <Text onPress={()=>Actions.contact({ title:'Contact', data: rowData })} >{rowData.ContactName}</Text>}
                 />
               </View>
             </View>

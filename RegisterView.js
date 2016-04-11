@@ -55,15 +55,19 @@ var RegisterView = React.createClass({
                 console.log('AccountID: '+accountId);
                 // Set in DB
                 db.write(() => {
-                  db.create('Account', { 
-                      AccountNumber: accountId,
-                      BankNumber: '',
-                      AccountHolderName: data.AccountHolderFamilyName+','+data.AccountHolderGivenName,
-                      AccountBalance: 0,
-                      Overdraft: 0,
-                      AvailableBalance: 0,
-                      //Timestamp: Math.floor(Date.now())
-                      Timestamp: 1
+                    // Delete all other accounts for now
+                    let accounts = db.objects('Account');
+                    db.delete(accounts);
+
+                    db.create('Account', { 
+                        AccountNumber: accountId,
+                        BankNumber: '',
+                        AccountHolderName: data.AccountHolderFamilyName+','+data.AccountHolderGivenName,
+                        AccountBalance: 0,
+                        Overdraft: 0,
+                        AvailableBalance: 0,
+                        //Timestamp: Math.floor(Date.now())
+                        Timestamp: 1
                     });
                 });
                 console.log('Written');

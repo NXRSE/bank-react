@@ -32,6 +32,7 @@ var LoginView = React.createClass({
         if (userAuth.length > 0) {
             var userAccount = userAuth.slice(0,1);
             userAccount = userAccount[0];
+
             if (userAccount.Password != this.state.password) {
                 Alert.alert('Auth Failure', 'Password incorrect');
                 return;
@@ -44,18 +45,17 @@ var LoginView = React.createClass({
             let res = bc.authLogin(data, function(res) {
                 console.log(res);
                 if (typeof res.error == 'undefined') {
-                    // Delete tokens
-                    db.write(() => {
-                        let allTokens = db.objects('AccountToken');
-                        db.delete(allTokens);
-                    });
                     // Get token
                     let token = res.response;
                     db.write(() => {
-                      db.create('AccountToken', { 
-                          Token: token,
-                          //Timestamp: Math.floor(Date.now())
-                          Timestamp: 1
+                    // Delete tokens
+                        let allTokens = db.objects('AccountToken');
+                        db.delete(allTokens);
+
+                        db.create('AccountToken', { 
+                           Token: token,
+                           //Timestamp: Math.floor(Date.now())
+                           Timestamp: 1
                         });
                     });
                     // Go to account landing view
