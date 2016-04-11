@@ -86,6 +86,7 @@ var LoginView = React.createClass({
                     value={this.state.password}
                     autoCorrect={false}
                     keyboardAppearance="dark"
+                    secureTextEntry={true}
                     autoCapitalize="none"
                     placeholder="Password"
                 />

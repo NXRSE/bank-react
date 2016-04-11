@@ -130,6 +130,7 @@ var CreateAuthView = React.createClass({
                     autoCorrect={false}
                     keyboardAppearance="dark"
                     autoCapitalize="none"
+                    secureTextEntry={true}
                     placeholder="Password"
                 />
                 <Button onPress={ this._doCreateAuth }>Create Login</Button>
