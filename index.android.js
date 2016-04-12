@@ -1,51 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
+'use strict';
 
-import React, {
+import React, { 
   AppRegistry,
   Component,
-  StyleSheet,
   Text,
-  View
+  View,
+  StatusBar,
+  StyleSheet,
+  Navigator
 } from 'react-native';
+
+import {Actions, Scene, Router, TabBar} from 'react-native-router-flux';
+
+StatusBar.setBarStyle('light-content');
 
 class BankReact extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
+    return <Router>
+        <Scene key="root">
+            <Scene key="loginRegister" component={LoginRegisterView} title="Bank"/>
+            <Scene key="login" component={LoginView} title="Login"/>
+            <Scene key="register" component={RegisterView} title="Register"/>
+            <Scene key="createAuth" component={CreateAuthView} title="Register"/>
+            <Scene key="main" component={MainAccountTabs} title="Tab Example"/>
+            <Scene key="contact" component={ContactView} title="Contact"/>
+            <Scene key="paymentCredit" component={MainPaymentCreditView} title="PaymentCredit"/>
+            <Scene key="paymentDeposit" component={MainPaymentDepositView} title="PaymentDeposit"/>
+        </Scene>
+    </Router>
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+var styles = require('./styles');
+// Views
+var LoginRegisterView = require('./LoginRegisterView');
+var LoginView = require('./LoginView');
+var RegisterView = require('./RegisterView');
+var CreateAuthView = require('./CreateAuthView');
+var MainAccountTabs = require('./MainAccountTabs');
+var ContactView = require('./ContactView');
+var MainPaymentCreditView = require('./MainPaymentCreditView');
+var MainPaymentDepositView = require('./MainPaymentDepositView');
+
+// DB
+var db = require('./libs/RealmDB');
+//console.log(db.path);
 
 AppRegistry.registerComponent('BankReact', () => BankReact);

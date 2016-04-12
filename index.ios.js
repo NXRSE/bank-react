@@ -7,8 +7,7 @@ import React, {
   View,
   StatusBar,
   StyleSheet,
-  Navigator,
-  NavigatorIOS
+  Navigator
 } from 'react-native';
 
 import {Actions, Scene, Router, TabBar} from 'react-native-router-flux';
