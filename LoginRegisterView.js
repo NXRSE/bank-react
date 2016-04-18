@@ -57,7 +57,7 @@ class LoginRegisterView extends Component{
                     <Button onPress={()=>Actions.login({title:'Login' })}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                        style={{fontSize: 20, color: 'green'}}>Login</Button>
-                    <Button onPress={Actions.register({title: 'Register'})}
+                    <Button onPress={()=>Actions.register({title: 'Register'})}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                        style={{fontSize: 20, color: 'green'}}>Register</Button>
 					<Button
