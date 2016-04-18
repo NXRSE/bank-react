@@ -29,7 +29,7 @@ class BankReact extends Component {
                 <Scene key="login" component={LoginView} title="Login"/>
                 <Scene key="register" component={RegisterView} title="Register"/>
                 <Scene key="createAuth" component={CreateAuthView} title="Register"/>
-                <Scene key="main" component={MainAccountTabs} title="Tab Example"/>
+                <Scene key="main" component={MainAccountTabs} title="Main Account"/>
                 <Scene key="contact" component={ContactView} title="Contact"/>
                 <Scene key="paymentCredit" component={MainPaymentCreditView} title="PaymentCredit"/>
                 <Scene key="paymentDeposit" component={MainPaymentDepositView} title="PaymentDeposit"/>
