@@ -18,6 +18,7 @@ let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
 let db = require('./libs/RealmDB');  
+let dismissKeyboard = require('dismissKeyboard');
 
 var CreateAuthView = React.createClass({
     getInitialState() {
@@ -54,7 +55,7 @@ var CreateAuthView = React.createClass({
                     });
                     // Go to account landing view
                     dismissKeyboard();
-                    Actions.main();
+                    Actions.main({type : "reset"});
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);

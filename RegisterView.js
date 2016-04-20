@@ -8,6 +8,7 @@ import React, {
   View,
   StatusBar,
   StyleSheet,
+  Alert
 } from 'react-native';
 
 import Button from 'react-native-button'
@@ -80,6 +81,7 @@ var RegisterView = React.createClass({
                 console.log(userAccount);
                 dismissKeyboard();
                 if (userAccount.length == 1) {
+                    console.log("Successfull")
                     console.log(userAccount[0]);
                     Actions.createAuth();
                 }
