@@ -28,17 +28,24 @@ var MainAccountView = React.createClass({
         }
     },
 
+    updateStateListener: function() {
+        // Fetch account
+        let user = db.objects('Account');
+        var userAccount = user.slice(0,1);
+        userAccount = userAccount[0];
+        console.log(userAccount.AccountBalance);
+        this.setState({ 'balance' : userAccount.AccountBalance });
+    },
+
 	componentDidMount: function() {
 		// Observe Realm Change Events
-		db.addListener('change', () => {
-			// Fetch account
-			let user = db.objects('Account');
-			var userAccount = user.slice(0,1);
-			userAccount = userAccount[0];
-			console.log(userAccount.AccountBalance);
-			this.setState({ 'balance' : userAccount.AccountBalance });
-		});
+		db.addListener('change', this.updateStateListener);
 	},
+
+    componentWillUnmount: function() {
+        // Remove the listener
+		db.removeListener('change', this.updateStateListener);
+    },
 
     render: function() {
 
