@@ -33,6 +33,12 @@ const AccountTokenSchema = {
     Timestamp: 'int',
   }
 };
+const DeviceTokenSchema = {
+  name: 'DeviceToken',
+  properties: {
+    Token:  'string'
+  }
+};
 const AccountMetaSchema = {
   name: 'AccountMeta',
   properties: {
@@ -72,6 +78,6 @@ const ContactsSchema = {
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 3 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 5 });
 
 module.exports = realm;

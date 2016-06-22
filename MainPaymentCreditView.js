@@ -43,7 +43,7 @@ var MainPaymentCreditView = React.createClass({
                 console.log(res);
                 if (typeof res.error == 'undefined') {
                     dismissKeyboard();
-                    Actions.main();
+                    Actions.main({ type : "reset" });
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);
