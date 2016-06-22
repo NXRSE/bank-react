@@ -153,6 +153,16 @@ function BankClient() {
 		this._doCallAuth('/auth/account', 'DELETE', data, token, cb);
 	}
 
+	this.addPushToken = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/accountPushToken', 'POST', data, token, cb);
+	}
+
+	this.removePushToken = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/accountPushToken', 'DELETE', data, token, cb);
+	}
+
     // Token
     this.getToken = function() {
         let tokenResult = db.objects('AccountToken');

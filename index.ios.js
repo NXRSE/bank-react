@@ -20,21 +20,24 @@ PushNotification.configure({
 
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function(token) {
-		let tokenString = token.token;
+		//let tokenString = token.token;
+		let tokenString = "test-token-string-ios";
         console.log( 'TOKEN:', tokenString );
 		Alert.alert('Token', tokenString);
-/*
-		// Save in database
-		db.write(() => {
-			// Delete tokens
-			let allTokens = db.objects('DeviceToken');
-			db.delete(allTokens); 
 
-			db.create('DeviceToken', { 
-			   Token: tokenString,
-			});
-		});
-*/
+        if (typeof tokenString != undefined) {
+            // Save in database
+            db.write(() => {
+                // Delete tokens
+                let allTokens = db.objects('DeviceToken');
+                db.delete(allTokens); 
+
+                db.create('DeviceToken', { 
+                   Token: tokenString,
+                   Platform: "ios"
+                });
+            });
+        }
     },
 
     // (required) Called when a remote or local notification is opened or received
@@ -67,11 +70,6 @@ PushNotification.configure({
 class BankReact extends Component {
 
 	render() {
-		// Set up database
-		//let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 1 });
-		// @TODO Apply Encryption
-		//let realm = new Realm({ schema: [AccountSchema], encryptionKey: key });
-
         return <Router>
             <Scene key="root">
                 <Scene key="loginRegister" component={LoginRegisterView} title="Bank"/>

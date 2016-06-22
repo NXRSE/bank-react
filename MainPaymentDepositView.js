@@ -43,7 +43,8 @@ var MainPaymentDepositView = React.createClass({
                 if (typeof res.error == 'undefined') {
                     console.log('Go to main...');
                     dismissKeyboard();
-                    Actions.main({ selectedTab: 'account', type : "reset" });
+                    // Can't switch to main view as it is the same level but a separate view
+                    alert("Deposit successful");
                 } else {
                     // Show error
                     dismissKeyboard();
