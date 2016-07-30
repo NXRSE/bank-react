@@ -84,34 +84,32 @@ var MainPaymentCreditView = React.createClass({
     render: function() {
         return (
             <View style={styles.global.container}>
-                <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
-                    <View style={styles.landingPage.smallLogoWrap}>
-                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
-                    </View>
-                      <View style={styles.global.wrap}>
-                        <Text>MAIN PAYMENTS CREDIT</Text>
-                        <Text>Make payment to: {this.props.data.ContactName}</Text>
-                        <TextInput
-                            style={styles.forms.inputText}
-                            onChangeText={(paymentAmount) => this.setState({paymentAmount})}
-                            value={this.state.paymentAmount}
-                            autoCorrect={false}
-                            keyboardType='decimal-pad'
-                            autoCapitalize="none"
-                            placeholder="Payment Amount"
-                        />
-                        <TextInput
-                            style={styles.forms.inputText}
-                            onChangeText={(paymentDesc) => this.setState({paymentDesc})}
-                            value={this.state.paymentDesc}
-                            autoCorrect={false}
-                            autoCapitalize="none"
-                            placeholder="Description"
-                        />
-                        <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
-                        onPress={ this._doPayment }>Make Payment</Button>
-                      </View>
-                    </Image>
+                <View style={styles.landingPage.smallLogoWrap}>
+                    <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                </View>
+                  <View style={styles.global.wrap}>
+                    <Text>MAIN PAYMENTS CREDIT</Text>
+                    <Text>Make payment to: {this.props.data.ContactName}</Text>
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(paymentAmount) => this.setState({paymentAmount})}
+                        value={this.state.paymentAmount}
+                        autoCorrect={false}
+                        keyboardType='decimal-pad'
+                        autoCapitalize="none"
+                        placeholder="Payment Amount"
+                    />
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(paymentDesc) => this.setState({paymentDesc})}
+                        value={this.state.paymentDesc}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        placeholder="Description"
+                    />
+                    <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                    onPress={ this._doPayment }>Make Payment</Button>
+                  </View>
             </View>
         )
     }

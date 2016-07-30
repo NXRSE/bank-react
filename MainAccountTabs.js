@@ -14,6 +14,7 @@ var MainContactsView = require('./MainContactsView');
 var MainPaymentDepositView = require('./MainPaymentDepositView');
 var MainSettingsView = require('./MainSettingsView');
 
+let styles = require('./styles');
 let db = require('./libs/RealmDB'); 
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
@@ -75,74 +76,65 @@ var MainAccountTabs = React.createClass({
 
     render: function() {
       return (
-        <TabBarIOS
-          tintColor="white"
-          barTintColor="darkslateblue">
-          <TabBarIOS.Item
-            systemIcon="favorites"
-            title="Main Account"
-            selected={this.state.selectedTab === 'account'}
-            onPress={() => {
-              // Update balance
-              this._updateAccount();
-              this.setState({
-                selectedTab: 'account',
-              });
-            }}>
-      	<MainAccountView />
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-            systemIcon="contacts"
-            title="Contacts"
-            badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
-            selected={this.state.selectedTab === 'contacts'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'contacts',
-                notifCount: this.state.notifCount + 1,
-              });
-            }}>
-      	<MainContactsView />
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-            systemIcon="top-rated"
-            title="Deposit"
-            selected={this.state.selectedTab === 'paymentsDeposit'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'paymentsDeposit',
-                presses: this.state.presses + 1
-              });
-            }}>
-      	<MainPaymentDepositView />
-          </TabBarIOS.Item>
-          <TabBarIOS.Item
-            systemIcon="bookmarks"
-            title="Settings"
-            selected={this.state.selectedTab === 'settings'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'settings',
-                presses: this.state.presses + 1
-              });
-            }}>
-      	<MainSettingsView />
-          </TabBarIOS.Item>
-        </TabBarIOS>
+        <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
+            <TabBarIOS
+              tintColor="white"
+              barTintColor="#031d2c">
+              <TabBarIOS.Item
+                systemIcon="favorites"
+                title="Main"
+                selected={this.state.selectedTab === 'account'}
+                onPress={() => {
+                  // Update balance
+                  this._updateAccount();
+                  this.setState({
+                    selectedTab: 'account',
+                  });
+                }}>
+                <MainAccountView />
+              </TabBarIOS.Item>
+              <TabBarIOS.Item
+                systemIcon="contacts"
+                title="Contacts"
+                badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
+                selected={this.state.selectedTab === 'contacts'}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: 'contacts',
+                    notifCount: this.state.notifCount + 1,
+                  });
+                }}>
+                <MainContactsView />
+              </TabBarIOS.Item>
+              <TabBarIOS.Item
+                systemIcon="top-rated"
+                title="Deposit"
+                selected={this.state.selectedTab === 'paymentsDeposit'}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: 'paymentsDeposit',
+                    presses: this.state.presses + 1
+                  });
+                }}>
+                <MainPaymentDepositView />
+              </TabBarIOS.Item>
+              <TabBarIOS.Item
+                systemIcon="bookmarks"
+                title="Settings"
+                selected={this.state.selectedTab === 'settings'}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: 'settings',
+                    presses: this.state.presses + 1
+                  });
+                }}>
+                <MainSettingsView />
+              </TabBarIOS.Item>
+            </TabBarIOS>
+        </Image>
       );
     },
 
-});
-
-var styles = StyleSheet.create({
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: 'white',
-    margin: 50,
-  },
 });
 
 module.exports = MainAccountTabs;

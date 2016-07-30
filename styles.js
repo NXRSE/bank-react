@@ -9,4 +9,5 @@ module.exports = {
     buttons: require('./style/buttons'),
     forms: require('./style/forms'),
     main: require('./style/main'),
+    tabs: require('./style/tabs'),
 };

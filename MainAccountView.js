@@ -52,15 +52,13 @@ var MainAccountView = React.createClass({
 
         return (
             <View style={styles.global.container}>
-                <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
-                    <View style={styles.landingPage.smallLogoWrap}>
-                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
-                    </View>
-                  <View style={styles.global.wrap}>
-                    <Text>MAIN ACCOUNT</Text>
-                    <Text>{this.state.balance}</Text>
-                  </View>
-              </Image>
+                <View style={styles.landingPage.smallLogoWrap}>
+                    <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                </View>
+              <View style={styles.global.wrap}>
+                <Text>MAIN ACCOUNT</Text>
+                <Text>{this.state.balance}</Text>
+              </View>
             </View>
         )
     }
