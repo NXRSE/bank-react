@@ -24,8 +24,34 @@ var MainPaymentDepositView = React.createClass({
     getInitialState() {
         dismissKeyboard();
         return {
-            depositAmount: ''
+            depositAmount: '',
+            depositDesc: '',
+            initialPosition: 'unknown', 
+            lastPosition: 'unknown',
         }
+    },
+
+    componentDidMount: function() {
+        navigator.geolocation.getCurrentPosition( 
+            (position) => {    
+                var initialPosition = JSON.stringify(position); 
+                this.setState({initialPosition});
+                console.log(initialPosition);
+            }, 
+            (error) => alert(error.message), 
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000} 
+        ); 
+        
+        this.watchID = navigator.geolocation.watchPosition((position) => { 
+            var lastPosition = JSON.stringify(position); this.setState({lastPosition}); 
+            console.log("Last pos");
+            console.log(lastPosition);
+            console.log(lastPosition['coords']);
+        });
+    },
+
+    componentWillUnmount: function() { 
+        navigator.geolocation.clearWatch(this.watchID); 
     },
 
     _doDeposit: function() {
@@ -33,9 +59,13 @@ var MainPaymentDepositView = React.createClass({
         if (user.length > 0) {
             var userAccount = user.slice(0,1);
             userAccount = userAccount[0];
+            let lastPos = JSON.parse(this.state.lastPosition)
             let data = {
                 AccountDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
-                Amount: this.state.depositAmount
+                Amount: this.state.depositAmount,
+                Lat: lastPos.coords.latitude,
+                Lon: lastPos.coords.longitude,
+                Desc: this.state.depositDesc
             };
 
             let res = bc.paymentDeposit(data, function(res) {
@@ -68,6 +98,14 @@ var MainPaymentDepositView = React.createClass({
                     autoCapitalize="none"
                     keyboardType='decimal-pad'
                     placeholder="Deposit Amount"
+                />
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(depositDesc) => this.setState({depositDesc})}
+                    value={this.state.depositDesc}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    placeholder="Description"
                 />
                 <Button onPress={ this._doDeposit }>Deposit</Button>
               </View>
