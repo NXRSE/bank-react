@@ -8,6 +8,7 @@ import React, {
   View,
   StatusBar,
   StyleSheet,
+  Image,
   Alert
 } from 'react-native';
 
@@ -98,40 +99,46 @@ var RegisterView = React.createClass({
     render() {
         return (
             <View style={styles.global.container}>
-              <View style={styles.global.wrap}>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(givenName) => this.setState({givenName})}
-                    value={this.state.givenName}
-                    autoCorrect={false}
-                    placeholder="Given Name"
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(familyName) => this.setState({familyName})}
-                    value={this.state.familyName}
-                    autoCorrect={false}
-                    placeholder="Family Name"
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(idNumber) => this.setState({idNumber})}
-                    value={this.state.idNumber}
-                    autoCorrect={false}
-                    keyboardType='number-pad'
-                    placeholder="ID Number"
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(email) => this.setState({email})}
-                    value={this.state.email}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    keyboardType='email-address'
-                    placeholder="Email"
-                />
-                <Button onPress={ this._doRegister }>Register</Button>
-              </View>
+                <Image source={require('./assets/bg.png')} style={styles.landingPage.backgroundImage}>
+                    <View style={styles.landingPage.smallLogoWrap}>
+                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                    </View>
+                  <View style={styles.global.wrap}>
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(givenName) => this.setState({givenName})}
+                        value={this.state.givenName}
+                        autoCorrect={false}
+                        placeholder="Given Name"
+                    />
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(familyName) => this.setState({familyName})}
+                        value={this.state.familyName}
+                        autoCorrect={false}
+                        placeholder="Family Name"
+                    />
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(idNumber) => this.setState({idNumber})}
+                        value={this.state.idNumber}
+                        autoCorrect={false}
+                        keyboardType='number-pad'
+                        placeholder="ID Number"
+                    />
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(email) => this.setState({email})}
+                        value={this.state.email}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        keyboardType='email-address'
+                        placeholder="Email"
+                    />
+                    <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                    onPress={ this._doRegister }>REGISTER</Button>
+                  </View>
+              </Image>
             </View>
         )
     }

@@ -70,16 +70,16 @@ PushNotification.configure({
 class BankReact extends Component {
 
 	render() {
-        return <Router>
+        return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
             <Scene key="root">
-                <Scene key="loginRegister" component={LoginRegisterView} title="Bank"/>
-                <Scene key="login" component={LoginView} title="Login"/>
-                <Scene key="register" component={RegisterView} title="Register"/>
-                <Scene key="createAuth" component={CreateAuthView} title="Register"/>
-                <Scene key="main" component={MainAccountTabs} title="Main Account"/>
-                <Scene key="contact" component={ContactView} title="Contact"/>
-                <Scene key="paymentCredit" component={MainPaymentCreditView} title="PaymentCredit"/>
-                <Scene key="paymentDeposit" component={MainPaymentDepositView} title="PaymentDeposit"/>
+                <Scene key="loginRegister" component={LoginRegisterView}/>
+                <Scene key="login" component={LoginView}/>
+                <Scene key="register" component={RegisterView}/>
+                <Scene key="createAuth" component={CreateAuthView}/>
+                <Scene key="main" component={MainAccountTabs}/>
+                <Scene key="contact" component={ContactView}/>
+                <Scene key="paymentCredit" component={MainPaymentCreditView}/>
+                <Scene key="paymentDeposit" component={MainPaymentDepositView}/>
             </Scene>
         </Router>
     }

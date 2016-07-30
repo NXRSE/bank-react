@@ -5,6 +5,7 @@ var {
   StyleSheet,
   TabBarIOS,
   Text,
+  Image,
   View,
 } = React;
 

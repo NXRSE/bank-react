@@ -8,6 +8,7 @@ import React, {
   StatusBar,
   StyleSheet,
   TextInput,
+  Image,
   Alert
 } from 'react-native';
 
@@ -36,7 +37,6 @@ var MainPaymentDepositView = React.createClass({
             (position) => {    
                 var initialPosition = JSON.stringify(position); 
                 this.setState({initialPosition});
-                console.log(initialPosition);
             }, 
             (error) => alert(error.message), 
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000} 
@@ -44,9 +44,6 @@ var MainPaymentDepositView = React.createClass({
         
         this.watchID = navigator.geolocation.watchPosition((position) => { 
             var lastPosition = JSON.stringify(position); this.setState({lastPosition}); 
-            console.log("Last pos");
-            console.log(lastPosition);
-            console.log(lastPosition['coords']);
         });
     },
 
@@ -88,27 +85,33 @@ var MainPaymentDepositView = React.createClass({
     render: function() {
         return (
             <View style={styles.global.container}>
-              <View style={styles.global.wrap}>
-                <Text>MAIN PAYMENTS DEPOSIT</Text>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(depositAmount) => this.setState({depositAmount})}
-                    value={this.state.depositAmount}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    keyboardType='decimal-pad'
-                    placeholder="Deposit Amount"
-                />
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(depositDesc) => this.setState({depositDesc})}
-                    value={this.state.depositDesc}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    placeholder="Description"
-                />
-                <Button onPress={ this._doDeposit }>Deposit</Button>
-              </View>
+                <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
+                    <View style={styles.landingPage.smallLogoWrap}>
+                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                    </View>
+                      <View style={styles.global.wrap}>
+                        <Text>MAIN PAYMENTS DEPOSIT</Text>
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(depositAmount) => this.setState({depositAmount})}
+                            value={this.state.depositAmount}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            keyboardType='decimal-pad'
+                            placeholder="Deposit Amount"
+                        />
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(depositDesc) => this.setState({depositDesc})}
+                            value={this.state.depositDesc}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            placeholder="Description"
+                        />
+                        <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                        onPress={ this._doDeposit }>DEPOSIT</Button>
+                      </View>
+                    </Image>
             </View>
         )
     }

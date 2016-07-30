@@ -10,6 +10,7 @@ import React, {
   NavigatorIOS,
   TouchableOpacity,
   PushNotificationIOS,
+  Image,
   AlertIOS
 } from 'react-native';
 
@@ -53,20 +54,22 @@ class LoginRegisterView extends Component{
     render() {
         return (
             <View style={styles.global.container}>
-                <View style={styles.global.wrap}>
-                    <Button onPress={()=>Actions.login({title:'Login' })}
-                    containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}>Login</Button>
-                    <Button onPress={()=>Actions.register({title: 'Register'})}
-                    containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}>Register</Button>
-					<Button
-					containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
-                                       style={{fontSize: 20, color: 'green'}}	
-						onPress={this._sendNotification}
-						label="Send fake notification"
-					>Notification</Button>
-                </View>
+                <Image source={require('./assets/bg.png')} style={styles.landingPage.backgroundImage}>
+                    <View style={styles.landingPage.bigLogoWrap}>
+                        <Image source={require('./assets/logo-bg.png')} style={styles.landingPage.bigLogo} />
+                    </View>
+                    <View style={styles.global.wrap}>
+                        <Button onPress={()=>Actions.login()}
+                        containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}>SIGN IN</Button>
+                        <Button onPress={()=>Actions.register()}
+                        containerStyle={styles.buttons.containerBase} style={styles.buttons.base}>REGISTER</Button>
+                        <Button
+                        containerStyle={styles.buttons.containerNotification} style={styles.buttons.base}	
+                            onPress={this._sendNotification}
+                            label="Send fake notification"
+                        >Notification</Button>
+                    </View>
+                </Image>
             </View>
         )
     }

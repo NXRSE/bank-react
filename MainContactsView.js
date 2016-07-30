@@ -9,6 +9,7 @@ import React, {
   StyleSheet,
   TextInput,
   ListView,
+  Image,
   Alert
 } from 'react-native';
 
@@ -57,13 +58,18 @@ var MainContactsView = React.createClass({
     render: function() {
         return (
             <View style={styles.global.container}>
-              <View style={styles.global.wrap}>
-                <Text>MAIN CONTACTS</Text>
-                <ListView
-                dataSource={this.state.dataSource}
-                renderRow={(rowData) => <Text onPress={()=>Actions.contact({ title:'Contact', data: rowData })} >{rowData.ContactName}</Text>}
-                />
-              </View>
+                <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
+                    <View style={styles.landingPage.smallLogoWrap}>
+                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                    </View>
+                      <View style={styles.global.wrap}>
+                        <Text>MAIN CONTACTS</Text>
+                        <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={(rowData) => <Text onPress={()=>Actions.contact({ data: rowData })} >{rowData.ContactName}</Text>}
+                        />
+                      </View>
+                    </Image>
             </View>
         )
     }

@@ -7,14 +7,24 @@ module.exports = StyleSheet.create({
         flex: 1
     },
     base: {
-        backgroundColor: '#2A3744',
-        paddingTop: 30,
-        paddingBottom: 10,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderWidth: 0,
         flexDirection: 'column',
     },
     title: {
         color: 'white',
         textAlign: 'center',
+        borderColor: 'transparent',
+        borderWidth: 0,
         fontWeight: 'bold',
+    },
+    buttonText: {
+        borderColor: 'transparent',
+        borderWidth: 0,
+    },
+    buttonIcon: {
+        borderColor: 'transparent',
+        borderWidth: 0,
     },
 });
