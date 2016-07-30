@@ -81,16 +81,17 @@ var LoginView = React.createClass({
 
     addPushTokenInit: function() {
         // Testing
+        /*
         let pushToken = "test-push-token-ios-2";
         let platform = "ios";
         let data = { PushToken: pushToken, Platform: platform };
         bc.addPushToken(data, () => {
             console.log("push token added");
         });
+        */
 
         // Fetch token 
-        /*
-         * @FIXME This is currently throwing "Error: Object type 'DeviceToken' not present in Realm"
+        // * @FIXME This is currently throwing "Error: Object type 'DeviceToken' not present in Realm"
         let pushTokenObj = db.objects('DeviceToken');
         if (pushTokenObj.length > 0) {
             var pushTokenArr = pushTokenObj.slice(0,1);
@@ -103,7 +104,6 @@ var LoginView = React.createClass({
                 console.log("push token added");
             });
         }
-        */
     },
 
     render: function() {

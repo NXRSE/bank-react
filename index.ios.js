@@ -20,10 +20,9 @@ PushNotification.configure({
 
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function(token) {
-		//let tokenString = token.token;
-		let tokenString = "test-token-string-ios";
+		let tokenString = token.token;
+		//let tokenString = "test-token-string-ios";
         console.log( 'TOKEN:', tokenString );
-		Alert.alert('Token', tokenString);
 
         if (typeof tokenString != undefined) {
             // Save in database
