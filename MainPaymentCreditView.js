@@ -24,8 +24,30 @@ var MainPaymentCreditView = React.createClass({
     getInitialState() {
         dismissKeyboard();
         return {
-            paymentAmount: ''
+            paymentAmount: '',
+            paymentDesc: '',
+            initialPosition: 'unknown', 
+            lastPosition: 'unknown',
         }
+    },
+
+    componentDidMount: function() {
+        navigator.geolocation.getCurrentPosition( 
+            (position) => {    
+                var initialPosition = JSON.stringify(position); 
+                this.setState({initialPosition});
+            }, 
+            (error) => alert(error.message), 
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000} 
+        ); 
+        
+        this.watchID = navigator.geolocation.watchPosition((position) => { 
+            var lastPosition = JSON.stringify(position); this.setState({lastPosition}); 
+        });
+    },
+
+    componentWillUnmount: function() { 
+        navigator.geolocation.clearWatch(this.watchID); 
     },
 
     _doPayment: function() {
@@ -33,10 +55,14 @@ var MainPaymentCreditView = React.createClass({
         if (user.length > 0) {
             var userAccount = user.slice(0,1);
             userAccount = userAccount[0];
+            let lastPos = JSON.parse(this.state.lastPosition)
             let data = {
                 SenderDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
-                RecipientDetails: this.props.data.ContactAccountNumer+'@'+this.props.data.ContactBankNumber,
-                Amount: this.state.paymentAmount
+                RecipientDetails: this.props.data.ContactAccountNumber+'@'+this.props.data.ContactBankNumber,
+                Amount: this.state.paymentAmount,
+                Lat: lastPos.coords.latitude,
+                Lon: lastPos.coords.longitude,
+                Desc: this.state.paymentDesc
             };
 
             let res = bc.paymentCredit(data, function(res) {
@@ -68,6 +94,14 @@ var MainPaymentCreditView = React.createClass({
                     keyboardType='decimal-pad'
                     autoCapitalize="none"
                     placeholder="Payment Amount"
+                />
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(paymentDesc) => this.setState({paymentDesc})}
+                    value={this.state.paymentDesc}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    placeholder="Description"
                 />
                 <Button onPress={ this._doPayment }>Make Payment</Button>
               </View>
