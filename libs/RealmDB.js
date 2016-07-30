@@ -4,6 +4,7 @@
 // Encrypt database
 var key = new Int8Array(64);
 const Realm = require('realm');
+
 // @TODO Move schemas into separate file
 // Set up schemas
 const AccountSchema = {
@@ -31,6 +32,13 @@ const AccountTokenSchema = {
   properties: {
     Token:  'string',
     Timestamp: 'int',
+  }
+};
+const DeviceTokenSchema = {
+  name: 'DeviceToken',
+  properties: {
+    Token:  'string',
+    Platform:  'string'
   }
 };
 const AccountMetaSchema = {
@@ -72,6 +80,6 @@ const ContactsSchema = {
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 3 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 6 });
 
 module.exports = realm;

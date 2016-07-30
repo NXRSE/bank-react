@@ -82,6 +82,8 @@ var MainAccountTabs = React.createClass({
             title="Main Account"
             selected={this.state.selectedTab === 'account'}
             onPress={() => {
+              // Update balance
+              this._updateAccount();
               this.setState({
                 selectedTab: 'account',
               });

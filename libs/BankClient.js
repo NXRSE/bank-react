@@ -125,12 +125,12 @@ function BankClient() {
 
 	this.paymentCredit = function(data, cb) {
         let token = this.getToken();
-		this._doCallAuth('/payment/credit', 'POST', data, token, cb);
+		this._doCallAuth('/transaction/credit', 'POST', data, token, cb);
 	},
 
 	this.paymentDeposit = function(data, cb) {
         let token = this.getToken();
-		this._doCallAuth('/payment/deposit', 'POST', data, token, cb);
+		this._doCallAuth('/transaction/deposit', 'POST', data, token, cb);
 	},
 
 	this.accountGet = function(data, cb) {
@@ -151,6 +151,16 @@ function BankClient() {
 	this.authRemove = function(data, cb) {
         let token = this.getToken();
 		this._doCallAuth('/auth/account', 'DELETE', data, token, cb);
+	}
+
+	this.addPushToken = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/accountPushToken', 'POST', data, token, cb);
+	}
+
+	this.removePushToken = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/accountPushToken', 'DELETE', data, token, cb);
 	}
 
     // Token

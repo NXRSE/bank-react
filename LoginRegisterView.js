@@ -8,7 +8,9 @@ import React, {
   StatusBar,
   StyleSheet,
   NavigatorIOS,
-  TouchableOpacity
+  TouchableOpacity,
+  PushNotificationIOS,
+  AlertIOS
 } from 'react-native';
 
 import Button from 'react-native-button'
@@ -18,22 +20,52 @@ var styles = require('./styles');
 let dismissKeyboard = require('dismissKeyboard');
 
 class LoginRegisterView extends Component{
-    componentWillMount() {
-        // Check to see if account created
-        // Check if auth account created
-        // Go to login
+	componentWillMount() {
+		PushNotificationIOS.addEventListener('notification', this._onNotification);
+	}
+
+	componentWillUnmount() {
+		PushNotificationIOS.removeEventListener('notification', this._onNotification);
+	}
+
+    _sendNotification() {
+      require('RCTDeviceEventEmitter').emit('remoteNotificationReceived', {
+        aps: {
+          alert: 'Sample notification',
+          badge: '+1',
+          sound: 'default',
+          category: 'REACT_NATIVE'
+        },
+      });
+    }
+
+    _onNotification(notification) {
+      AlertIOS.alert(
+        'Notification Received',
+        'Alert message: ' + notification.getMessage(),
+        [{
+          text: 'Dismiss',
+          onPress: null,
+        }]
+      );
     }
 
     render() {
         return (
             <View style={styles.global.container}>
                 <View style={styles.global.wrap}>
-                    <Button onPress={()=>Actions.login({data:"Custom data", title:'Custom title' })}
+                    <Button onPress={()=>Actions.login({title:'Login' })}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                        style={{fontSize: 20, color: 'green'}}>Login</Button>
-                    <Button onPress={Actions.register}
+                    <Button onPress={()=>Actions.register({title: 'Register'})}
                     containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
                                        style={{fontSize: 20, color: 'green'}}>Register</Button>
+					<Button
+					containerStyle={{padding:10, height:45, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
+                                       style={{fontSize: 20, color: 'green'}}	
+						onPress={this._sendNotification}
+						label="Send fake notification"
+					>Notification</Button>
                 </View>
             </View>
         )
