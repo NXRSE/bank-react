@@ -1,4 +1,4 @@
-rootProject.name = 'BankReact'
+rootProject.name = 'BVNK'
 
 include ':app'
 include ':realm'
