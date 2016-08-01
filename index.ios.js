@@ -69,25 +69,29 @@ PushNotification.configure({
 class BankReact extends Component {
 
 	render() {
+        //return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon} drawerImage='./image'>
         return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
-            <Scene key="root">
-                <Scene key="loginRegister" component={LoginRegisterView}/>
-                <Scene key="login" component={LoginView}/>
-                <Scene key="register" component={RegisterView}/>
-                <Scene key="createAuth" component={CreateAuthView}/>
-                <Scene key="main" component={MainAccountView}/>
-                <Scene key="contact" component={ContactView}/>
-                <Scene key="paymentContactsList" component={MainContactsView}/>
-                <Scene key="paymentCredit" component={MainPaymentCreditView}/>
-                <Scene key="paymentDeposit" component={MainPaymentDepositView}/>
-                <Scene key="settings" component={MainSettingsView}/>
-            </Scene>
+                    <Scene key="drawer" component={DrawerView} open={false} >
+                <Scene key="root">
+                    <Scene key="loginRegister" component={LoginRegisterView}/>
+                    <Scene key="login" component={LoginView}/>
+                    <Scene key="register" component={RegisterView}/>
+                    <Scene key="createAuth" component={CreateAuthView}/>
+                        <Scene key="main" component={MainAccountView}/>
+                        <Scene key="contact" component={ContactView}/>
+                        <Scene key="paymentContactsList" component={MainContactsView}/>
+                        <Scene key="paymentCredit" component={MainPaymentCreditView}/>
+                        <Scene key="paymentDeposit" component={MainPaymentDepositView}/>
+                        <Scene key="settings" component={MainSettingsView}/>
+                </Scene>
+                    </Scene>
         </Router>
     }
 }
 
 var styles = require('./styles');
 // Views
+var DrawerView = require('./DrawerView');
 var LoginRegisterView = require('./LoginRegisterView');
 var LoginView = require('./LoginView');
 var RegisterView = require('./RegisterView');

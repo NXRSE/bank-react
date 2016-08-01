@@ -25,10 +25,10 @@ export default class ControlPanel extends Component {
           <Text>Close Drawer</Text>
         </TouchableOpacity>
 
-        <Button style={styles.button} onPress={()=>Actions.main({type : "reset"})}>Main</Button>
+        <Button style={styles.button} onPress={()=>Actions.main({type : "reset", open: false})}>Main</Button>
         <Button style={styles.button} onPress={()=>Actions.paymentContactsList({type : "reset"})}>Credit</Button>
         <Button style={styles.button} onPress={()=>Actions.paymentDeposit({type : "reset"})}>Deposit</Button>
-        <Button style={styles.button} onPress={()=>Actions.settings({type : "reset"})}>Settings</Button>
+        <Button style={styles.button} onPress={()=>Actions.settings({type : "reset", open: false})}>Settings</Button>
       </ScrollView>
     )
   }
