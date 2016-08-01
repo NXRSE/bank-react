@@ -75,10 +75,12 @@ class BankReact extends Component {
                 <Scene key="login" component={LoginView}/>
                 <Scene key="register" component={RegisterView}/>
                 <Scene key="createAuth" component={CreateAuthView}/>
-                <Scene key="main" component={MainAccountTabs}/>
+                <Scene key="main" component={MainAccountView}/>
                 <Scene key="contact" component={ContactView}/>
+                <Scene key="paymentContactsList" component={MainContactsView}/>
                 <Scene key="paymentCredit" component={MainPaymentCreditView}/>
                 <Scene key="paymentDeposit" component={MainPaymentDepositView}/>
+                <Scene key="settings" component={MainSettingsView}/>
             </Scene>
         </Router>
     }
@@ -90,10 +92,12 @@ var LoginRegisterView = require('./LoginRegisterView');
 var LoginView = require('./LoginView');
 var RegisterView = require('./RegisterView');
 var CreateAuthView = require('./CreateAuthView');
-var MainAccountTabs = require('./MainAccountTabs');
+var MainAccountView = require('./MainAccountView');
 var ContactView = require('./ContactView');
 var MainPaymentCreditView = require('./MainPaymentCreditView');
 var MainPaymentDepositView = require('./MainPaymentDepositView');
+var MainSettingsView = require('./MainSettingsView');
+var MainContactsView = require('./MainContactsView');
 
 // DB
 var db = require('./libs/RealmDB');
