@@ -21,7 +21,7 @@ module.exports = StyleSheet.create({
         height:45, 
         overflow:'hidden', 
         borderRadius: 20, 
-        borderColor: 'white',
+        borderColor: '#515152',
         borderWidth: 1,
         backgroundColor: 'transparent',
         paddingTop: 17,
