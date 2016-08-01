@@ -8,6 +8,7 @@ import React, {
   StatusBar,
   StyleSheet,
   TextInput,
+  Image,
   Alert
 } from 'react-native';
 
@@ -140,7 +141,7 @@ var CreateAuthView = React.createClass({
                             placeholder="Password"
                         />
                         <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
-                        onPress={ this._doCreateAuth }>Create Login</Button>
+                        onPress={ this._doCreateAuth }>CREATE LOGIN</Button>
                       </View>
                     </View>
                 </View>
