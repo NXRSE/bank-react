@@ -33,7 +33,7 @@ var MainSettingsView = React.createClass({
                     <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                 </View>
                   <View style={styles.global.wrap}>
-                    <Text>MAIN SETTINGS</Text>
+                    <Text style={styles.global.heading}>SETTINGS</Text>
                   </View>
             </View>
             </Image>

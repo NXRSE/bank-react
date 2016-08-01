@@ -21,6 +21,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		3E1DB8A21D4FAA9100B46716 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DB8A11D4FAA9100B46716 /* Berlin.ttf */; };
+		3E1DB8B01D4FAABE00B46716 /* ArticulatCF-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3E1DB8AF1D4FAABE00B46716 /* ArticulatCF-Light.otf */; };
 		3EDC87BE1CC4A0560083827B /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDC87BD1CC4A0190083827B /* libRCTPushNotification.a */; };
 		5BAB831414DC40E0AD600918 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB782DE0FD24297B6BBFD4B /* libz.tbd */; };
 		6852EE5053AD459BAD942D97 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B725E4EA317244F9859CC194 /* libc++.tbd */; };
@@ -142,6 +144,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BankReact/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BankReact/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		3E1DB8A11D4FAA9100B46716 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Berlin.ttf; path = "../../../../../Design/Type/BERLIN-Minimal-Typeface-Web-Font/Berlin.ttf"; sourceTree = "<group>"; };
+		3E1DB8AF1D4FAABE00B46716 /* ArticulatCF-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ArticulatCF-Light.otf"; path = "../../../../../Design/Type/Articulat 1.4w/OTF/ArticulatCF-Light.otf"; sourceTree = "<group>"; };
 		3EDC87B81CC4A0190083827B /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 		13B07FAE1A68108700A75B9A /* BankReact */ = {
 			isa = PBXGroup;
 			children = (
+				3E1DB8AF1D4FAABE00B46716 /* ArticulatCF-Light.otf */,
+				3E1DB8A11D4FAA9100B46716 /* Berlin.ttf */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -590,8 +596,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E1DB8A21D4FAA9100B46716 /* Berlin.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3E1DB8B01D4FAABE00B46716 /* ArticulatCF-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

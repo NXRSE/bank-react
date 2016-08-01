@@ -71,11 +71,11 @@ var MainPaymentDepositView = React.createClass({
                 if (typeof res.error == 'undefined') {
                     console.log('Go to main...');
                     dismissKeyboard();
-                    Actions.main({ type: "reset", message: "Deposit successful"});
+                    Actions.main({ type: "reset", message: "🎉 Deposit successful"});
                 } else {
                     // Show error
                     dismissKeyboard();
-                    Actions.main({ type: "reset", message: "Error: "+error});
+                    Actions.main({ type : "reset",  message: "❌ Error: "+res.error });
                 }
             });
         }
@@ -89,10 +89,7 @@ var MainPaymentDepositView = React.createClass({
                     <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                 </View>
                   <View style={styles.global.wrap}>
-                    <TouchableOpacity style={styles.button} onPress={this.openDrawer}>
-                        <Text>Open Drawer</Text>
-                    </TouchableOpacity>
-                    <Text>MAIN PAYMENTS DEPOSIT</Text>
+                    <Text style={styles.global.heading}>DEPOSIT PAYMENT</Text>
                     <TextInput
                         style={styles.forms.inputText}
                         onChangeText={(depositAmount) => this.setState({depositAmount})}

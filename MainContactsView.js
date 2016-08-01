@@ -37,7 +37,7 @@ var MainContactsView = React.createClass({
     componentDidMount: function() {
         let res = bc.accountGetAll({}, function(res) {
             if (typeof res.error == 'undefined') {
-                let contacts = JSON.parse(res.response);
+                let contacts = res.response;
                 db.write(() => {
                     contacts.forEach(function(c) { 
                         // Check if contact exists
@@ -64,13 +64,15 @@ var MainContactsView = React.createClass({
                     <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                 </View>
                   <View style={styles.global.wrap}>
-                    <TouchableOpacity style={styles.button} onPress={this.openDrawer}>
-                        <Text>Open Drawer</Text>
-                    </TouchableOpacity>
-                    <Text>MAIN CONTACTS</Text>
+                    <Text style={styles.global.heading}>CONTACTS</Text>
                     <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) => <Text onPress={()=>Actions.contact({ data: rowData })} >{rowData.ContactName}</Text>}
+                    renderRow={(rowData) => 
+                    <View
+                    style={styles.global.contactItem}>
+                        <Text onPress={()=>Actions.contact({ data: rowData })} 
+                        style={styles.global.contactItemText}>{rowData.ContactName}</Text>
+                    </View>}
                     />
                   </View>
             </View>

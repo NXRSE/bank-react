@@ -29,6 +29,7 @@ var MainAccountView = React.createClass({
         dismissKeyboard();
         return {
             balance: "nil",
+            balanceDecimal: "nil",
         }
     },
 
@@ -73,7 +74,14 @@ var MainAccountView = React.createClass({
         var userAccount = user.slice(0,1);
         userAccount = userAccount[0];
         console.log(userAccount.AccountBalance);
-        this.setState({ 'balance' : userAccount.AccountBalance });
+        console.log(typeof(userAccount.AccountBalance));
+        var balance = Math.floor(userAccount.AccountBalance);
+        let balanceDecimal = Math.round((userAccount.AccountBalance - balance) * 100);
+        console.log(balance);
+        console.log(balanceDecimal);
+        balance = this.numberWithCommas(balance);
+        this.setState({ 'balance' : balance });
+        this.setState({ 'balanceDecimal' : balanceDecimal });
     },
 
 	componentDidMount: function() {
@@ -86,10 +94,14 @@ var MainAccountView = React.createClass({
 		db.removeListener('change', this.updateStateListener);
     },
 
+    numberWithCommas: function(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+
     render: function() {
         var notificationMessage;
         if (typeof(this.props.message) != 'undefined') {
-              notificationMessage = <Text>Message: {this.props.message}</Text>;
+              notificationMessage = <Text style={styles.global.notification}>{this.props.message}</Text>;
         }         
 
         return (
@@ -99,9 +111,14 @@ var MainAccountView = React.createClass({
                         <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                     </View>
                   <View style={styles.global.wrap}>
-                    <Text>MAIN ACCOUNT</Text>
+                    <Text style={styles.global.heading}>ACCOUNT</Text>
                     {notificationMessage}
-                    <Text>{this.state.balance}</Text>
+                    <View style={styles.global.balanceContainerWrap}>
+                        <View style={styles.global.balanceContainer}>
+                            <Text style={styles.global.balance}>{this.state.balance}</Text>
+                            <Text style={styles.global.balanceDecimal}> . {this.state.balanceDecimal}</Text>
+                        </View>
+                    </View>
                   </View>
                 </View>
             </Image>
