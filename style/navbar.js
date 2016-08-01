@@ -9,7 +9,7 @@ module.exports = StyleSheet.create({
     base: {
         backgroundColor: 'transparent',
         borderColor: 'transparent',
-        borderWidth: 0,
+        borderBottomWidth: 0,
         flexDirection: 'column',
     },
     title: {

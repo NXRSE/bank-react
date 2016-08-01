@@ -66,6 +66,7 @@ var LoginView = React.createClass({
                     // Go to account landing view
                     dismissKeyboard();
                     Actions.main({type : "reset"});
+                    //Actions.refresh({key: 'drawer', open: value => !value});
                 } else {
                     // Show error
                     Alert.alert('Error', res.error);

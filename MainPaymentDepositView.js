@@ -9,6 +9,7 @@ import React, {
   StyleSheet,
   TextInput,
   Image,
+  TouchableOpacity,
   Alert
 } from 'react-native';
 
@@ -70,13 +71,11 @@ var MainPaymentDepositView = React.createClass({
                 if (typeof res.error == 'undefined') {
                     console.log('Go to main...');
                     dismissKeyboard();
-                    // Can't switch to main view as it is the same level but a separate view
-                    alert("Deposit successful");
+                    Actions.main({ type: "reset", message: "🎉 Deposit successful"});
                 } else {
                     // Show error
                     dismissKeyboard();
-                    Alert.alert('Error', res.error);
-                    return;
+                    Actions.main({ type : "reset",  message: "❌ Error: "+res.error });
                 }
             });
         }
@@ -84,35 +83,35 @@ var MainPaymentDepositView = React.createClass({
 
     render: function() {
         return (
+            <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
             <View style={styles.global.container}>
-                <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
-                    <View style={styles.landingPage.smallLogoWrap}>
-                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
-                    </View>
-                      <View style={styles.global.wrap}>
-                        <Text>MAIN PAYMENTS DEPOSIT</Text>
-                        <TextInput
-                            style={styles.forms.inputText}
-                            onChangeText={(depositAmount) => this.setState({depositAmount})}
-                            value={this.state.depositAmount}
-                            autoCorrect={false}
-                            autoCapitalize="none"
-                            keyboardType='decimal-pad'
-                            placeholder="Deposit Amount"
-                        />
-                        <TextInput
-                            style={styles.forms.inputText}
-                            onChangeText={(depositDesc) => this.setState({depositDesc})}
-                            value={this.state.depositDesc}
-                            autoCorrect={false}
-                            autoCapitalize="none"
-                            placeholder="Description"
-                        />
-                        <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
-                        onPress={ this._doDeposit }>DEPOSIT</Button>
-                      </View>
-                    </Image>
+                <View style={styles.landingPage.smallLogoWrap}>
+                    <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                </View>
+                  <View style={styles.global.wrap}>
+                    <Text style={styles.global.heading}>DEPOSIT PAYMENT</Text>
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(depositAmount) => this.setState({depositAmount})}
+                        value={this.state.depositAmount}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        keyboardType='decimal-pad'
+                        placeholder="Deposit Amount"
+                    />
+                    <TextInput
+                        style={styles.forms.inputText}
+                        onChangeText={(depositDesc) => this.setState({depositDesc})}
+                        value={this.state.depositDesc}
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        placeholder="Description"
+                    />
+                    <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                    onPress={ this._doDeposit }>DEPOSIT</Button>
+                  </View>
             </View>
+            </Image>
         )
     }
 });

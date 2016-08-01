@@ -4,13 +4,15 @@ import React, { StyleSheet } from 'react-native';
 
 module.exports = StyleSheet.create({
     input: {
-        borderColor: 'grey',
+        fontFamily: 'Berlin',
+        borderColor: '#515152',
         height: 40,
         borderWidth: 40,
         flex: 1
     },
     inputText: {
-        borderColor: '#CCC',
+        fontFamily: 'ArticulatCF-Light',
+        borderColor: '#0b5a87',
         backgroundColor: 'rgba(255,255,255,0.15)',
         height: 40,
         borderWidth: 1,

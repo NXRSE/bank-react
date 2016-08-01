@@ -38,10 +38,11 @@ var ContactView = React.createClass({
                         <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                     </View>
                       <View style={styles.global.wrap}>
-                        <Text>MAIN CONTACT</Text>
-                        <Text>Contact name: {this.props.data.ContactName}</Text>
-                        <Text>Contact Account Number: {this.props.data.ContactAccountNumber}</Text>
-                        <Text>Contact Bank Number: {this.props.data.ContactBankNumber}</Text>
+                        <Text style={styles.global.heading}>{this.props.data.ContactName}</Text>
+                        <Text style={styles.global.contactInfoHeading}>Account Number: </Text>
+                        <Text style={styles.global.contactInfo}>{this.props.data.ContactAccountNumber}</Text>
+                        <Text style={styles.global.contactInfoHeading}>Bank Number: </Text>
+                        <Text style={styles.global.contactInfo}>{this.props.data.ContactBankNumber}</Text>
 
                         <Button 
                         onPress={ ()=>Actions.paymentCredit({ data: this.props.data }) }

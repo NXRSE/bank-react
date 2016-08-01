@@ -8,6 +8,7 @@ import React, {
   StatusBar,
   StyleSheet,
   TextInput,
+  Image,
   Alert
 } from 'react-native';
 
@@ -122,21 +123,29 @@ var CreateAuthView = React.createClass({
 
     render: function() {
         return (
-            <View style={styles.global.container}>
-              <View style={styles.global.wrap}>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    autoCorrect={false}
-                    keyboardAppearance="dark"
-                    autoCapitalize="none"
-                    secureTextEntry={true}
-                    placeholder="Password"
-                />
-                <Button onPress={ this._doCreateAuth }>Create Login</Button>
-              </View>
-            </View>
+            <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
+                <View style={styles.global.container}>
+                    <View style={styles.landingPage.smallLogoWrap}>
+                        <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
+                    </View>
+                    <View style={styles.global.container}>
+                      <View style={styles.global.wrap}>
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(password) => this.setState({password})}
+                            value={this.state.password}
+                            autoCorrect={false}
+                            keyboardAppearance="dark"
+                            autoCapitalize="none"
+                            secureTextEntry={true}
+                            placeholder="Password"
+                        />
+                        <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                        onPress={ this._doCreateAuth }>CREATE LOGIN</Button>
+                      </View>
+                    </View>
+                </View>
+            </Image>
         )
     }
 });

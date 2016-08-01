@@ -9,6 +9,7 @@ import React, {
   StyleSheet,
   TextInput,
   Image,
+  TouchableOpacity,
   Alert
 } from 'react-native';
 
@@ -70,10 +71,10 @@ var MainPaymentCreditView = React.createClass({
                 console.log(res);
                 if (typeof res.error == 'undefined') {
                     dismissKeyboard();
-                    Actions.main({ type : "reset" });
+                    Actions.main({ type : "reset",  message: "💸 Payment successful" });
                 } else {
                     // Show error
-                    Alert.alert('Error', res.error);
+                    Actions.main({ type : "reset",  message: "❌ Error: "+res.error });
                     dismissKeyboard();
                     return;
                 }
@@ -83,13 +84,14 @@ var MainPaymentCreditView = React.createClass({
 
     render: function() {
         return (
+            <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
             <View style={styles.global.container}>
                 <View style={styles.landingPage.smallLogoWrap}>
                     <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                 </View>
                   <View style={styles.global.wrap}>
-                    <Text>MAIN PAYMENTS CREDIT</Text>
-                    <Text>Make payment to: {this.props.data.ContactName}</Text>
+                    <Text style={styles.global.heading}>CREDIT PAYMENT</Text>
+                    <Text style={styles.global.generalText}>Make payment to: {this.props.data.ContactName}</Text>
                     <TextInput
                         style={styles.forms.inputText}
                         onChangeText={(paymentAmount) => this.setState({paymentAmount})}
@@ -111,6 +113,7 @@ var MainPaymentCreditView = React.createClass({
                     onPress={ this._doPayment }>Make Payment</Button>
                   </View>
             </View>
+            </Image>
         )
     }
 });

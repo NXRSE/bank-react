@@ -11,23 +11,36 @@ import React, {
   TouchableOpacity,
   PushNotificationIOS,
   Image,
+  PropTypes,
   AlertIOS
 } from 'react-native';
 
 import Button from 'react-native-button'
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
+import Drawer from 'react-native-drawer'
+
+import ControlPanel from './ControlPanel'
+import DrawerView from './DrawerView'
 
 var styles = require('./styles');
+
 let dismissKeyboard = require('dismissKeyboard');
 
-class LoginRegisterView extends Component{
+//class LoginRegisterView extends Component{
+var LoginRegisterView = React.createClass({
+    getInitialState() {
+        return {
+            drawerDisabled: true
+        }
+    },
+
 	componentWillMount() {
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
-	}
+	},
 
 	componentWillUnmount() {
 		PushNotificationIOS.removeEventListener('notification', this._onNotification);
-	}
+	},
 
     _sendNotification() {
       require('RCTDeviceEventEmitter').emit('remoteNotificationReceived', {
@@ -38,7 +51,7 @@ class LoginRegisterView extends Component{
           category: 'REACT_NATIVE'
         },
       });
-    }
+    },
 
     _onNotification(notification) {
       AlertIOS.alert(
@@ -49,7 +62,7 @@ class LoginRegisterView extends Component{
           onPress: null,
         }]
       );
-    }
+    },
 
     render() {
         return (
@@ -73,6 +86,6 @@ class LoginRegisterView extends Component{
             </View>
         )
     }
-};
+});
 
 module.exports = LoginRegisterView;
