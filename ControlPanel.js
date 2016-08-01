@@ -37,6 +37,8 @@ export default class ControlPanel extends Component {
             onPress={()=>Actions.paymentDeposit({type : "reset"})}>DEPOSIT</Button>
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
             onPress={()=>Actions.settings({type : "reset", open: false})}>SETTINGS</Button>
+            <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
+            onPress={()=>Actions.loginRegister({type : "reset", open: false})}>LOG OUT</Button>
           </ScrollView>
       </Image>
     )

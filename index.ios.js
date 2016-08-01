@@ -72,7 +72,7 @@ class BankReact extends Component {
         return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
                 <Scene key="drawer" component={DrawerView} open={false} >
                     <Scene key="root" drawerImage={require('./assets/hamburger.png')}>
-                        <Scene key="loginRegister" component={LoginRegisterView}/>
+                        <Scene key="loginRegister" component={LoginRegisterView} hideNavBar={true}/>
                         <Scene key="login" component={LoginView}/>
                         <Scene key="register" component={RegisterView}/>
                         <Scene key="createAuth" component={CreateAuthView}/>
