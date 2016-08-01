@@ -87,6 +87,11 @@ var MainAccountView = React.createClass({
     },
 
     render: function() {
+        var notificationMessage;
+        if (typeof(this.props.message) != 'undefined') {
+              notificationMessage = <Text>Message: {this.props.message}</Text>;
+        }         
+
         return (
             <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
                 <View style={styles.global.container}>
@@ -95,6 +100,7 @@ var MainAccountView = React.createClass({
                     </View>
                   <View style={styles.global.wrap}>
                     <Text>MAIN ACCOUNT</Text>
+                    {notificationMessage}
                     <Text>{this.state.balance}</Text>
                   </View>
                 </View>

@@ -71,13 +71,11 @@ var MainPaymentDepositView = React.createClass({
                 if (typeof res.error == 'undefined') {
                     console.log('Go to main...');
                     dismissKeyboard();
-                    // Can't switch to main view as it is the same level but a separate view
-                    alert("Deposit successful");
+                    Actions.main({ type: "reset", message: "Deposit successful"});
                 } else {
                     // Show error
                     dismissKeyboard();
-                    Alert.alert('Error', res.error);
-                    return;
+                    Actions.main({ type: "reset", message: "Error: "+error});
                 }
             });
         }
