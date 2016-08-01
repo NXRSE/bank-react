@@ -65,10 +65,13 @@ class DrawerView extends Component {
 			panThreshold={0.08}
 			disabled={true}
 			openDrawerOffset={(viewport) => {
-			  return 100
+			  return 0
 			}}
 			closedDrawerOffset={() => 0}
 			panOpenMask={0.2}
+            tweenHandler={(ratio) => ({
+                mainOverlay: { opacity:(2-ratio)/2 }
+            })}
 			negotiatePan
 			>
 				<DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
@@ -116,8 +119,17 @@ class DrawerView extends Component {
 var drawerStyles = {
     drawer: {
         shadowColor: "#000000",
-        shadowOpacity: 0.8,
+        shadowOpacity: 0.2,
         shadowRadius: 0,
+    },
+    
+    main: {
+        shadowColor: "#000000",
+        shadowOpacity: 0.2,
+        shadowRadius: 0,
+    },
+
+    mainOverlay: {
     }
 }
 

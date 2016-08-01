@@ -10,4 +10,5 @@ module.exports = {
     forms: require('./style/forms'),
     main: require('./style/main'),
     tabs: require('./style/tabs'),
+    controlPanel: require('./style/controlPanel'),
 };

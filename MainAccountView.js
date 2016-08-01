@@ -24,10 +24,47 @@ let dismissKeyboard = require('dismissKeyboard');
 
 var MainAccountView = React.createClass({
     getInitialState() {
+        // Update balance
+        this._updateAccount();
         dismissKeyboard();
         return {
             balance: "nil",
         }
+    },
+
+    _updateAccount: function() {
+        console.log('updating account...');
+        // Get latest balances
+        let data = {};
+        let res = bc.accountGet(data, function(res) {
+            if (typeof res.error == 'undefined') {
+                console.log(res.response);
+                let userAccountDetails = JSON.parse(res.response);
+
+                db.write(() => {
+                    console.log('Writing');
+                    console.log(userAccountDetails.AccountNumber);
+                    // Update Main Account
+                    let userUpdate = db.objects('Account');
+                    var userAccountUpdate = userUpdate.filtered('AccountNumber == $0', userAccountDetails.AccountNumber);
+                    //var userAccountUpdate = userUpdate.slice(0,1).first;
+                    userAccountUpdate = userAccountUpdate[0];
+                    console.log(userAccountUpdate);
+
+                    userAccountUpdate.AccountHolderName = userAccountDetails.AccountHolderName;
+                    userAccountUpdate.Overdraft = userAccountDetails.Overdraft;
+                    userAccountUpdate.AvailableBalance = userAccountDetails.AvailableBalance;
+                    userAccountUpdate.AccountBalance = userAccountDetails.AccountBalance;
+
+                    console.log('After the write');
+                    console.log(userAccountUpdate);
+                });
+            } else {
+                Alert.alert('Error', 'Could not update account details');
+                dismissKeyboard();
+                return;
+            }
+        });
     },
 
     updateStateListener: function() {
