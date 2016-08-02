@@ -117,7 +117,7 @@ var MainPaymentCreditView = React.createClass({
                         placeholder="Description"
                     />
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
-                    onPress={ this._doPayment }>Make Payment</Button>
+                    onPress={ this._doPayment }>MAKE PAYMENT</Button>
                   </View>
             </View>
             </Image>

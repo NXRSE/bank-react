@@ -4,7 +4,7 @@
 // Encrypt database
 var key = new Int8Array(64);
 const Realm = require('realm');
-Realm.defaultPath = "/Users/ksred/Documents/Projects/Bank/ReactNative/BankReact/default.realm";
+//Realm.defaultPath = "/Users/ksred/Documents/Projects/Bank/ReactNative/BankReact/default.realm";
 
 // @TODO Move schemas into separate file
 // Set up schemas
