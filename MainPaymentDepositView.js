@@ -57,12 +57,19 @@ var MainPaymentDepositView = React.createClass({
         if (user.length > 0) {
             var userAccount = user.slice(0,1);
             userAccount = userAccount[0];
-            let lastPos = JSON.parse(this.state.lastPosition)
+            var lat = 0;
+            var lon = 0;
+            let lastPosState = this.state.lastPosition;
+            if (lastPosState != 'unknown') {
+                let lastPos = JSON.parse(this.state.lastPosition);
+                lat = lastPos.coords.latitude;
+                lon = lastPos.coords.longitude;
+            }
             let data = {
                 AccountDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
                 Amount: this.state.depositAmount,
-                Lat: lastPos.coords.latitude,
-                Lon: lastPos.coords.longitude,
+                Lat: lat,
+                Lon: lon,
                 Desc: this.state.depositDesc
             };
 

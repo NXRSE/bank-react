@@ -25,12 +25,13 @@ let dismissKeyboard = require('dismissKeyboard');
 
 var MainAccountView = React.createClass({
     getInitialState() {
+        console.log('create db:', db.path)
         // Update balance
         this._updateAccount();
         // Update transaction list
         this._updateTransactions();
         dismissKeyboard();
-        let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse');
+        let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse').slice(0, 5);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return {
             balance: "nil",
@@ -112,6 +113,19 @@ var MainAccountView = React.createClass({
                         let trDB = db.objects('Transactions').filtered('Transaction == $0', t.ID);
 
                         if (trDB.length == 0) {
+                            var senderName = "";
+                            var receiverName = "";
+
+                            var contact = db.objects('Contacts').filtered('ContactAccountNumber == $0 && ContactBankNumber == $1', t.Receiver.AccountNumber, t.Receiver.BankNumber);
+                            if (contact.length > 0) {
+                                receiverName = contact[0].ContactName;
+                            }
+
+                            contact = db.objects('Contacts').filtered('ContactAccountNumber == $0 && ContactBankNumber == $1', t.Sender.AccountNumber, t.Sender.BankNumber);
+                            if (contact.length > 0) {
+                                senderName = contact[0].ContactName;
+                            }
+
                             db.create('Transactions', { 
                                 Transaction: t.ID,
                                 Type: t.PainType,
@@ -120,6 +134,8 @@ var MainAccountView = React.createClass({
                                 ReceiverAccountNumber: t.Receiver.AccountNumber,
                                 ReceiverBankNumber: t.Receiver.BankNumber,
                                 TransactionAmount: t.Amount,
+                                SenderName: senderName,
+                                ReceiverName: receiverName,
                                 FeeAmount: t.Fee,
                                 Lat: t.Geo[0],
                                 Lon: t.Geo[1],
@@ -153,7 +169,9 @@ var MainAccountView = React.createClass({
 
     updateTransactionListener: function() {
         // Fetch transactions
-        let transactions = db.objects('Transactions');
+        let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse').slice(0, 5);
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({ dataSource: ds.cloneWithRows(transactions) });
     },
 
 	componentDidMount: function() {
@@ -210,6 +228,7 @@ var MainAccountView = React.createClass({
                     </View>
                     <ListView
                     dataSource={this.state.dataSource}
+                    style={styles.transaction.list}
                     renderRow={(rowData) => 
                     <View
                     style={styles.transaction.container}>

@@ -78,6 +78,18 @@ var MainTransactionsView = React.createClass({
                         let trDB = db.objects('Transactions').filtered('Transaction == $0', t.ID);
 
                         if (trDB.length == 0) {
+                            var senderName = "";
+                            var receiverName = "";
+
+                            var contact = db.objects('Contacts').filtered('ContactAccountNumber == $0 && ContactBankNumber == $1', t.Receiver.AccountNumber, t.Receiver.BankNumber);
+                            if (contact.length > 0) {
+                                receiverName = contact[0].ContactName;
+                            }
+
+                            contact = db.objects('Contacts').filtered('ContactAccountNumber == $0 && ContactBankNumber == $1', t.Sender.AccountNumber, t.Sender.BankNumber);
+                            if (contact.length > 0) {
+                                senderName = contact[0].ContactName;
+                            }
                             db.create('Transactions', { 
                                 Transaction: t.ID,
                                 Type: t.PainType,

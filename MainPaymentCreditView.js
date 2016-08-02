@@ -57,13 +57,20 @@ var MainPaymentCreditView = React.createClass({
         if (user.length > 0) {
             var userAccount = user.slice(0,1);
             userAccount = userAccount[0];
-            let lastPos = JSON.parse(this.state.lastPosition)
+            var lat = 0;
+            var lon = 0;
+            let lastPosState = this.state.lastPosition;
+            if (lastPosState != 'unknown') {
+                let lastPos = JSON.parse(this.state.lastPosition);
+                lat = lastPos.coords.latitude;
+                lon = lastPos.coords.longitude;
+            }
             let data = {
                 SenderDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
                 RecipientDetails: this.props.data.ContactAccountNumber+'@'+this.props.data.ContactBankNumber,
                 Amount: this.state.paymentAmount,
-                Lat: lastPos.coords.latitude,
-                Lon: lastPos.coords.longitude,
+                Lat: lat,
+                Lon: lon,
                 Desc: this.state.paymentDesc
             };
 

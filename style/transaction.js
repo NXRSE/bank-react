@@ -23,6 +23,14 @@ module.exports = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
+    list: {
+        marginTop: 0,
+        paddingTop: 0,
+        flex: 1,
+        flexDirection: 'column',
+        // @FIXME Find element that is forcing negative margins
+        marginTop: -250,
+    },
     desc: {
         textAlign: 'left',
         fontFamily: 'ArticulatCF-Light',
