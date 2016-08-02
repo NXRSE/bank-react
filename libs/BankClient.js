@@ -172,6 +172,11 @@ function BankClient() {
 		this._doCallAuthGet('/transaction/list/'+data.perPage+'/'+data.page+'/'+data.timestamp, 'GET', token, cb);
 	},
 
+	this.accountSearch = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/account/search', 'POST', data, token, cb);
+	},
+
     // Token
     this.getToken = function() {
         let tokenResult = db.objects('AccountToken');

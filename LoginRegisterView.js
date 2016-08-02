@@ -76,11 +76,6 @@ var LoginRegisterView = React.createClass({
                         containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}>SIGN IN</Button>
                         <Button onPress={()=>Actions.register()}
                         containerStyle={styles.buttons.containerBase} style={styles.buttons.base}>REGISTER</Button>
-                        <Button
-                        containerStyle={styles.buttons.containerNotification} style={styles.buttons.base}	
-                            onPress={this._sendNotification}
-                            label="Send fake notification"
-                        >Notification</Button>
                     </View>
                 </Image>
             </View>

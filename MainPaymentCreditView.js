@@ -113,7 +113,6 @@ var MainPaymentCreditView = React.createClass({
                         onChangeText={(paymentDesc) => this.setState({paymentDesc})}
                         value={this.state.paymentDesc}
                         autoCorrect={false}
-                        autoCapitalize="none"
                         placeholder="Description"
                     />
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}

@@ -111,7 +111,6 @@ var MainPaymentDepositView = React.createClass({
                         onChangeText={(depositDesc) => this.setState({depositDesc})}
                         value={this.state.depositDesc}
                         autoCorrect={false}
-                        autoCapitalize="none"
                         placeholder="Description"
                     />
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
