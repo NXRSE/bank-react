@@ -163,6 +163,16 @@ function BankClient() {
 		this._doCallAuth('/accountPushToken', 'DELETE', data, token, cb);
 	}
 
+	this.transactionsList = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuthGet('/transaction/list/'+data.perPage+'/'+data.page, 'GET', token, cb);
+	},
+
+	this.transactionsListAfterTimestamp = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuthGet('/transaction/list/'+data.perPage+'/'+data.page+'/'+data.timestamp, 'GET', token, cb);
+	},
+
     // Token
     this.getToken = function() {
         let tokenResult = db.objects('AccountToken');

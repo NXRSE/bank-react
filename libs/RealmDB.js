@@ -60,7 +60,7 @@ const AccountMetaSchema = {
 const TransactionsSchema = {
   name: 'Transactions',
   properties: {
-    Transaction:  { type: 'string', indexed: true },
+    Transaction:  { type: 'int', indexed: true },
     Type: 'int',
     SenderAccountNumber: 'string',
     SenderBankNumber: 'string',
@@ -68,6 +68,10 @@ const TransactionsSchema = {
     ReceiverBankNumber: 'string',
     TransactionAmount: 'float',
     FeeAmount: 'float',
+    Lat: 'float',
+    Lon: 'float',
+    Desc: 'string',
+    Status: 'string',
     Timestamp: 'int',
   }
 };
@@ -80,6 +84,6 @@ const ContactsSchema = {
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 7 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 9 });
 
 module.exports = realm;

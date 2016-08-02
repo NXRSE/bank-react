@@ -10,6 +10,7 @@
     "react-native": "^0.22.2",
     "react-native-button": "^1.4.2",
     "react-native-drawer": "^2.2.6",
+    "react-native-maps": "^0.7.1",
     "react-native-router-flux": "^3.2.9",
     "react-native-tabs": "^1.0.5",
     "realm": "^0.11.1"

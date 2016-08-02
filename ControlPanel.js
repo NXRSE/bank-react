@@ -32,6 +32,8 @@ export default class ControlPanel extends Component {
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base} 
             onPress={()=>Actions.main({type : "reset", open: false})}>MAIN</Button>
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
+            onPress={()=>Actions.transactionList({type : "reset"})}>TRANSACTIONS</Button>
+            <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
             onPress={()=>Actions.paymentContactsList({type : "reset"})}>CREDIT</Button>
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
             onPress={()=>Actions.paymentDeposit({type : "reset"})}>DEPOSIT</Button>
