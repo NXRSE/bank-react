@@ -62,6 +62,18 @@ var RegisterView = React.createClass({
                     // Delete all other accounts for now
                     let accounts = db.objects('Account');
                     db.delete(accounts);
+                    let contacts = db.objects('Contacts');
+                    db.delete(contacts);
+                    let transactions = db.objects('Transactions');
+                    db.delete(transactions);
+                    let auth = db.objects('AccountAuth');
+                    db.delete(auth);
+                    let authToken = db.objects('AccountToken');
+                    db.delete(authToken);
+                    let accountMeta = db.objects('AccountMeta');
+                    db.delete(accountMeta);
+                    let deviceToken = db.objects('DeviceToken');
+                    db.delete(deviceToken);
 
                     db.create('Account', { 
                         AccountNumber: accountId,

@@ -113,9 +113,8 @@ function BankClient() {
 		this._doCallNoAuth('/auth/account', 'POST', data, cb);
 	},
 
-	this.authExtend = function(data, cb) {
-        let token = this.getToken();
-		this._doCallAuth('/auth', 'POST', data, token, cb);
+	this.authExtend = function(token, cb) {
+		this._doCallAuth('/auth', 'POST', {}, token, cb);
 	},
 
 	this.accountCreate = function(data, cb) {
@@ -163,20 +162,84 @@ function BankClient() {
 		this._doCallAuth('/accountPushToken', 'DELETE', data, token, cb);
 	}
 
+	this.transactionsList = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuthGet('/transaction/list/'+data.perPage+'/'+data.page, 'GET', token, cb);
+	},
+
+	this.transactionsListAfterTimestamp = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuthGet('/transaction/list/'+data.perPage+'/'+data.page+'/'+data.timestamp, 'GET', token, cb);
+	},
+
+	this.accountSearch = function(data, cb) {
+        let token = this.getToken();
+		this._doCallAuth('/account/search', 'POST', data, token, cb);
+	},
+
     // Token
     this.getToken = function() {
         let tokenResult = db.objects('AccountToken');
         if (tokenResult.length > 0) {
-            var token = tokenResult.slice(0,1);
-            token = token[0];
+            let tokenDB = tokenResult.slice(0,1);
+            let tokenObj = tokenDB[0];
+            var token = tokenObj.Token;
+            console.log("Get token");
+            console.log(token);
 
             // Check token
-            // Update if necessary
+            //this.authExtend(token, this.extendTokenInBackground);
             // Return
-            return token.Token;
+            console.log("After extend: "+token);
+            return token;
+        }
+    },
+
+    this.extendTokenInBackground = function(res) {
+        console.log("getting to extend");
+        console.log(res);
+
+        if (typeof res.error != 'undefined') {
+            if (res.error == 'httpApiHandlers: Token invalid') {
+                console.log("token invalid");
+                let userAuth = db.objects('AccountAuth');
+                if (userAuth.length > 0) {
+                    var userAccount = userAuth.slice(0,1);
+                    userAccount = userAccount[0];
+
+                    console.log("User account in extend");
+                    let data = { User: userAccount.AccountNumber, Password: userAccount.Password };
+                    //@FIXME Missing context, cannot see "this" probably due to being passed as a callback
+                    let res = this.authLogin(data, function(res) {
+                        console.log("At second login: ");
+                        console.log(res);
+                        if (typeof res.error == 'undefined') {
+                            // Get token
+                            tokenRes = res.response;
+                            console.log("New token: "+tokenRes);
+                            db.write(() => {
+                            // Delete tokens
+                                let allTokens = db.objects('AccountToken');
+                                db.delete(allTokens);
+
+                                db.create('AccountToken', { 
+                                   Token: tokenRes,
+                                   //Timestamp: Math.floor(Date.now())
+                                   Timestamp: 1
+                                });
+                            });
+                            return tokenRes;
+                        } else {
+                            // Show error
+                            Alert.alert('Error', res.error);
+                            dismissKeyboard();
+                            return;
+                        }
+                    });
+                }
+            }
         }
     }
-
 }
 
 module.exports = BankClient;

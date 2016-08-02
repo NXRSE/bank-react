@@ -11,4 +11,5 @@ module.exports = {
     main: require('./style/main'),
     tabs: require('./style/tabs'),
     controlPanel: require('./style/controlPanel'),
+    transaction: require('./style/transaction'),
 };

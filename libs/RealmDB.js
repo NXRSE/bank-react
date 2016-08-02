@@ -4,6 +4,7 @@
 // Encrypt database
 var key = new Int8Array(64);
 const Realm = require('realm');
+//Realm.defaultPath = "/Users/ksred/Documents/Projects/Bank/ReactNative/BankReact/default.realm";
 
 // @TODO Move schemas into separate file
 // Set up schemas
@@ -59,15 +60,22 @@ const AccountMetaSchema = {
 };
 const TransactionsSchema = {
   name: 'Transactions',
+  primaryKey: 'Transaction',
   properties: {
-    Transaction:  { type: 'string', indexed: true },
+    Transaction:  { type: 'int', indexed: true },
     Type: 'int',
     SenderAccountNumber: 'string',
     SenderBankNumber: 'string',
     ReceiverAccountNumber: 'string',
     ReceiverBankNumber: 'string',
     TransactionAmount: 'float',
+    SenderName: 'string',
+    ReceiverName: 'string',
     FeeAmount: 'float',
+    Lat: 'float',
+    Lon: 'float',
+    Desc: 'string',
+    Status: 'string',
     Timestamp: 'int',
   }
 };
@@ -77,9 +85,10 @@ const ContactsSchema = {
     ContactName: { type: 'string', indexed: true },
     ContactAccountNumber: 'string',
     ContactBankNumber: 'string',
+    ContactEmailAddress: 'string',
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 7 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 13 });
 
 module.exports = realm;

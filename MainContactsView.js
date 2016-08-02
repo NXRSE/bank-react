@@ -35,25 +35,6 @@ var MainContactsView = React.createClass({
     },
 
     componentDidMount: function() {
-        let res = bc.accountGetAll({}, function(res) {
-            if (typeof res.error == 'undefined') {
-                let contacts = res.response;
-                db.write(() => {
-                    contacts.forEach(function(c) { 
-                        // Check if contact exists
-                        let contactDB = db.objects('Contacts').filtered('ContactName == $0 && ContactAccountNumber == $1 && ContactBankNumber == $2', c.AccountHolderName, c.AccountNumber, c.BankNumber);
-
-                        if (contactDB.length == 0) {
-                            db.create('Contacts', { ContactName: c.AccountHolderName, ContactAccountNumber: c.AccountNumber, ContactBankNumber: c.BankNumber });
-                        }
-                    });
-                });
-
-            } else {
-                // Error
-                console.log(res);
-            }
-        });
     },
 
     render: function() {
@@ -65,6 +46,8 @@ var MainContactsView = React.createClass({
                 </View>
                   <View style={styles.global.wrap}>
                     <Text style={styles.global.heading}>CONTACTS</Text>
+                    <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                    onPress={() => Actions.accountSearch() }>+</Button>
                     <ListView
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => 
