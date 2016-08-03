@@ -28,7 +28,8 @@ var MainTransactionsView = React.createClass({
     getInitialState: function() {
         dismissKeyboard();
         let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse');
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        // Limit to 100 transactions
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).slice(0, 100);
         return {
             dataSource: ds.cloneWithRows(transactions),
         };

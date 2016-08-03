@@ -26,16 +26,12 @@ let dismissKeyboard = require('dismissKeyboard');
 var MainAccountView = React.createClass({
     getInitialState() {
         console.log('create db:', db.path)
-        // Update balance
-        this._updateAccount();
-        // Update transaction list
-        this._updateTransactions();
         dismissKeyboard();
         let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse').slice(0, 5);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         return {
-            balance: "nil",
-            balanceDecimal: "nil",
+            balance: "",
+            balanceDecimal: "",
             dataSource: ds.cloneWithRows(transactions),
         }
     },
@@ -175,6 +171,8 @@ var MainAccountView = React.createClass({
     },
 
 	componentDidMount: function() {
+        // Update balance
+        this._updateAccount();
         // Update transaction list
         this._updateTransactions();
 		// Observe Realm Change Events
