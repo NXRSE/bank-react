@@ -109,9 +109,9 @@ var AddContactView = React.createClass({
                         autoCorrect={false}
                         placeholder="Email, ID or Name"
                     />
-                    {notificationMessage}
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
                     onPress={ this._doSearch }>SEARCH</Button>
+                    {notificationMessage}
 
                     <ListView
                     dataSource={this.state.dataSource}

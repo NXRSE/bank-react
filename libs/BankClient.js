@@ -14,7 +14,7 @@ import React, {
 let db = require('./RealmDB');  
 
 // @TODO Local testing
-const url = 'https://thebankoftoday.com:8443';
+const url = 'https://bvnk.co:8443';
 //const url = 'https://thebankoftoday.com/';
 
 //var BankClient = React.createClass({
