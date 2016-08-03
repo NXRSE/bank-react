@@ -139,11 +139,12 @@ var LoginView = React.createClass({
         let pushTokenObj = db.objects('DeviceToken');
         if (pushTokenObj.length > 0) {
             var pushTokenArr = pushTokenObj.slice(0,1);
-            pushToken = pushTokenArr[0];
+            let pushToken = pushTokenArr[0];
             console.log(pushToken);
-            let pushToken = pushToken.Token;
+            let pToken = pushToken.Token;
             let platform = pushToken.Platform;
-            let data = { Token: pushToken, Platform: platform };
+            let data = { PushToken: pToken, Platform: platform };
+            console.log(data);
             bc.addPushToken(data, () => {
                 console.log("push token added");
             });
