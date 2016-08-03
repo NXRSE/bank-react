@@ -36,6 +36,24 @@ var MainAccountView = React.createClass({
         }
     },
 
+    getInitialBalance: function() {
+        let user = db.objects('Account');
+        var userAccount = user;
+        //var userAccount = user.slice(0,1).first;
+        if (userAccount.length == 0) {
+            actions.login({ type: "reset" });
+            return;
+        }
+        userAccount = userAccount[0];
+        console.log(userAccount);
+
+        var balance = Math.floor(userAccount.AccountBalance);
+        let balanceDecimal = Math.round((userAccount.AccountBalance - balance) * 100);
+        balance = this.numberWithCommas(balance);
+        this.setState({ 'balance' : balance });
+        this.setState({ 'balanceDecimal' : balanceDecimal });
+    },
+
     _updateAccount: function() {
         console.log('updating account...');
         // Get latest balances
@@ -168,6 +186,10 @@ var MainAccountView = React.createClass({
         let transactions = db.objects('Transactions').sorted('Timestamp', 'reverse').slice(0, 5);
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({ dataSource: ds.cloneWithRows(transactions) });
+    },
+
+	componentWillMount: function() {
+        this.getInitialBalance();
     },
 
 	componentDidMount: function() {
