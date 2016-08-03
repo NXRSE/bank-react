@@ -14,7 +14,7 @@ import {Actions, Scene, Router, TabBar} from 'react-native-router-flux';
 
 StatusBar.setBarStyle('light-content');
 
-class BankReact extends Component {
+class BVNK extends Component {
   render() {
     return <Router>
         <Scene key="root">
@@ -46,4 +46,4 @@ var MainPaymentDepositView = require('./MainPaymentDepositView');
 var db = require('./libs/RealmDB');
 //console.log(db.path);
 
-AppRegistry.registerComponent('BankReact', () => BankReact);
+AppRegistry.registerComponent('BVNK', () => BVNK);

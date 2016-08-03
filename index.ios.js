@@ -66,7 +66,7 @@ PushNotification.configure({
     requestPermissions: true,
 });
 
-class BankReact extends Component {
+class BVNK extends Component {
 
 	render() {
         return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
@@ -114,4 +114,4 @@ var FetchAccountView = require('./FetchAccountView');
 var db = require('./libs/RealmDB');
 //console.log(db.path);
 
-AppRegistry.registerComponent('BankReact', () => BankReact);
+AppRegistry.registerComponent('BVNK', () => BVNK);
