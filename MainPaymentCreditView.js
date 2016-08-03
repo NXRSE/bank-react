@@ -65,10 +65,12 @@ var MainPaymentCreditView = React.createClass({
                 lat = lastPos.coords.latitude;
                 lon = lastPos.coords.longitude;
             }
+            // Replace , with . in payment amount
+            let paymentAmount = this.state.paymentAmount.replace(",", ".");
             let data = {
                 SenderDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
                 RecipientDetails: this.props.data.ContactAccountNumber+'@'+this.props.data.ContactBankNumber,
-                Amount: this.state.paymentAmount,
+                Amount: paymentAmount,
                 Lat: lat,
                 Lon: lon,
                 Desc: this.state.paymentDesc

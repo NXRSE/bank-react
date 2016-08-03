@@ -4,10 +4,10 @@ import React, {
   AppRegistry,
   Component,
   Text,
-  TextInput,
   View,
   StatusBar,
   StyleSheet,
+  TextInput,
   Image,
   Alert
 } from 'react-native';
@@ -15,13 +15,13 @@ import React, {
 import Button from 'react-native-button'
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
-var styles = require('./styles');
+let styles = require('./styles');
 let BankClient = require('./libs/BankClient');
 let bc = new BankClient();
-let db = require('./libs/RealmDB');
+let db = require('./libs/RealmDB');  
 let dismissKeyboard = require('dismissKeyboard');
 
-var RegisterView = React.createClass({
+var FetchAccountView = React.createClass({
     getInitialState() {
         dismissKeyboard();
         return {
@@ -32,7 +32,7 @@ var RegisterView = React.createClass({
         }
     },
 
-    _doRegister: function() {
+    _doFetchAccount: function() {
         let data = {
             AccountHolderGivenName: this.state.givenName, 
             AccountHolderFamilyName: this.state.familyName,
@@ -46,16 +46,13 @@ var RegisterView = React.createClass({
             AccountHolderAddressLine3: '',
             AccountHolderPostalCode: '',
         };
-        let res = bc.accountCreate(data, function(res) {
-            console.log("At register");
-            console.log(res);
-            console.log('One');
-            console.log(res.response);
-            console.log('Two');
-            console.log(typeof res.response);
-            console.log('Three');
+        let res = bc.fetchAccount(data, function(res) {
             if (typeof res.response != 'undefined') {
                 let accountId = res.response;
+                if (accountId == "") {
+                    // Account not found
+                    alert("Account not found");
+                }
                 console.log('AccountID: '+accountId);
                 // Set in DB
                 db.write(() => {
@@ -86,7 +83,7 @@ var RegisterView = React.createClass({
                         Timestamp: 1
                     });
                 });
-                console.log('Written');
+                
                 // Read the account value from DB
                 let user = db.objects('Account');
                 let userAccount = user.filtered('AccountNumber == $0', accountId);
@@ -96,7 +93,7 @@ var RegisterView = React.createClass({
                 if (userAccount.length == 1) {
                     console.log("Successfull")
                     console.log(userAccount[0]);
-                    Actions.createAuth();
+                    Actions.login();
                 }
                 // Alert token value
                 // Load new page
@@ -108,52 +105,54 @@ var RegisterView = React.createClass({
         });
     },
 
-    render() {
+    render: function() {
         return (
             <View style={styles.global.container}>
                 <Image source={require('./assets/bg.png')} style={styles.landingPage.backgroundImage}>
                     <View style={styles.landingPage.smallLogoWrap}>
                         <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                     </View>
-                  <View style={styles.global.wrap}>
-                    <TextInput
-                        style={styles.forms.inputText}
-                        onChangeText={(givenName) => this.setState({givenName})}
-                        value={this.state.givenName}
-                        autoCorrect={false}
-                        placeholder="Given Name"
-                    />
-                    <TextInput
-                        style={styles.forms.inputText}
-                        onChangeText={(familyName) => this.setState({familyName})}
-                        value={this.state.familyName}
-                        autoCorrect={false}
-                        placeholder="Family Name"
-                    />
-                    <TextInput
-                        style={styles.forms.inputText}
-                        onChangeText={(idNumber) => this.setState({idNumber})}
-                        value={this.state.idNumber}
-                        autoCorrect={false}
-                        keyboardType='number-pad'
-                        placeholder="ID Number"
-                    />
-                    <TextInput
-                        style={styles.forms.inputText}
-                        onChangeText={(email) => this.setState({email})}
-                        value={this.state.email}
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                        keyboardType='email-address'
-                        placeholder="Email"
-                    />
-                    <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
-                    onPress={ this._doRegister }>REGISTER</Button>
-                  </View>
-              </Image>
+                      <View style={styles.global.wrap}>
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(givenName) => this.setState({givenName})}
+                            value={this.state.givenName}
+                            autoCorrect={false}
+                            placeholder="Given Name"
+                        />
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(familyName) => this.setState({familyName})}
+                            value={this.state.familyName}
+                            autoCorrect={false}
+                            placeholder="Family Name"
+                        />
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(idNumber) => this.setState({idNumber})}
+                            value={this.state.idNumber}
+                            autoCorrect={false}
+                            keyboardType='number-pad'
+                            placeholder="ID Number"
+                        />
+                        <TextInput
+                            style={styles.forms.inputText}
+                            onChangeText={(email) => this.setState({email})}
+                            value={this.state.email}
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                            keyboardType='email-address'
+                            placeholder="Email"
+                        />
+                        <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
+                        onPress={ this._doFetchAccount }>RETRIEVE ACCOUNT</Button>
+                        <Button containerStyle={styles.buttons.containerBase} style={styles.buttons.base}
+                        onPress={ () => Actions.register() }>DON'T HAVE AN ACCOUNT YET?</Button>
+                      </View>
+                  </Image>
             </View>
         )
     }
 });
 
-module.exports = RegisterView;
+module.exports = FetchAccountView;

@@ -85,6 +85,7 @@ class BankReact extends Component {
                         <Scene key="transaction" component={TransactionView}/>
                         <Scene key="transactionList" component={MainTransactionView}/>
                         <Scene key="accountSearch" component={AddContactView}/>
+                        <Scene key="accountFetch" component={FetchAccountView}/>
                     </Scene>
                 </Scene>
         </Router>
@@ -107,6 +108,7 @@ var MainContactsView = require('./MainContactsView');
 var TransactionView = require('./TransactionView');
 var MainTransactionView = require('./MainTransactionsView');
 var AddContactView = require('./AddContactView');
+var FetchAccountView = require('./FetchAccountView');
 
 // DB
 var db = require('./libs/RealmDB');

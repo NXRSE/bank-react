@@ -105,12 +105,37 @@ function BankClient() {
 		});
     },
 
+    this._doCallFetchAccount = function(route, method, data, callback) {
+		return fetch(url+route, {
+		  method: method,
+		  headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			'X-IDNumber': data.AccountHolderIdentificationNumber,
+			'X-GivenName': data.AccountHolderGivenName,
+			'X-FamilyName': data.AccountHolderFamilyName,
+			'X-EmailAddress': data.AccountHolderEmailAddress,
+		  },
+		})
+		.then((response) => response.json())
+		.then((responseText) => {
+			callback(responseText);
+		})
+		.catch((error) => {
+			callback(error);
+		});
+    },
+
     this.authLogin = function (data, cb) {
 		this._doCallNoAuth('/auth/login', 'POST', data, cb);
     },
 
 	this.authCreate = function(data, cb) {
 		this._doCallNoAuth('/auth/account', 'POST', data, cb);
+	},
+
+	this.fetchAccount = function(data, cb) {
+		this._doCallFetchAccount('/accountRetrieve', 'GET', data, cb);
 	},
 
 	this.authExtend = function(token, cb) {

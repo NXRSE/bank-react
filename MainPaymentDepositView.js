@@ -65,9 +65,11 @@ var MainPaymentDepositView = React.createClass({
                 lat = lastPos.coords.latitude;
                 lon = lastPos.coords.longitude;
             }
+            // Replace , with . in payment amount
+            let paymentAmount = this.state.depositAmount.replace(",", ".");
             let data = {
                 AccountDetails: userAccount.AccountNumber+'@'+userAccount.BankNumber,
-                Amount: this.state.depositAmount,
+                Amount: paymentAmount,
                 Lat: lat,
                 Lon: lon,
                 Desc: this.state.depositDesc

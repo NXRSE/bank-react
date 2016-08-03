@@ -25,6 +25,7 @@ import DrawerView from './DrawerView'
 var styles = require('./styles');
 
 let dismissKeyboard = require('dismissKeyboard');
+let db = require('./libs/RealmDB');
 
 //class LoginRegisterView extends Component{
 var LoginRegisterView = React.createClass({
@@ -64,6 +65,17 @@ var LoginRegisterView = React.createClass({
       );
     },
 
+    loginOrRetrieve: function() {
+        let userAccount = db.objects('Account');
+        if (userAccount.length == 0) {
+            // There is no account set up yet
+            // Show fetch account screen
+            Actions.accountFetch();
+            return;
+        }
+        Actions.login();
+    },
+
     render() {
         return (
             <View style={styles.global.container}>
@@ -72,7 +84,7 @@ var LoginRegisterView = React.createClass({
                         <Image source={require('./assets/logo-bg.png')} style={styles.landingPage.bigLogo} />
                     </View>
                     <View style={styles.global.wrap}>
-                        <Button onPress={()=>Actions.login()}
+                        <Button onPress={this.loginOrRetrieve}
                         containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}>SIGN IN</Button>
                         <Button onPress={()=>Actions.register()}
                         containerStyle={styles.buttons.containerBase} style={styles.buttons.base}>REGISTER</Button>

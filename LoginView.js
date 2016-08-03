@@ -76,7 +76,50 @@ var LoginView = React.createClass({
             });
         } else {
             dismissKeyboard();
-            Actions.register();
+            // Check if an account exists
+            let userAccount = db.objects('Account');
+            if (userAccount.length == 0) {
+                Actions.register();
+                return;
+            }
+            // Send login
+            let data = { User: userAccount[0].AccountNumber, Password: this.state.password };
+            let res = bc.authLogin(data, function(res) {
+                console.log(res);
+                if (typeof res.error == 'undefined') {
+                    // Get token
+                    let token = res.response;
+                    db.write(() => {
+                    // Delete tokens
+                        let allTokens = db.objects('AccountToken');
+                        db.delete(allTokens);
+
+                        db.create('AccountToken', { 
+                           Token: token,
+                           //Timestamp: Math.floor(Date.now())
+                           Timestamp: 1
+                        });
+                    });
+                    // Go to account landing view
+                    dismissKeyboard();
+                    Actions.main({type : "reset"});
+                    //Actions.refresh({key: 'drawer', open: value => !value});
+                } else {
+                    // Show error
+                    Alert.alert('Error', res.error);
+                    dismissKeyboard();
+                    return;
+                }
+            });
+        }
+    },
+
+    checkAccount: function() {
+        let userAccount = db.objects('Account');
+        if (userAccount.length == 0) {
+            // There is no account set up yet
+            // Show fetch account screen
+            Actions.accountFetch();
         }
     },
 
