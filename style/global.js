@@ -133,5 +133,14 @@ module.exports = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 15,
     },
+    aboutText: {
+        textAlign: 'center',
+        backgroundColor: 'transparent',
+        fontFamily: 'ArticulatCF-Light',
+        fontSize: 25,
+        color: 'white',
+        marginLeft: 10,
+        marginTop: 20,
+    },
 });
 

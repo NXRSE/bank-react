@@ -136,12 +136,11 @@ var TransactionView = React.createClass({
                                 description=""
                             />
                         </MapView>
-                        <Text style={styles.transaction.desc}>{this.props.data.SenderName}</Text>
-                        <Text style={styles.transaction.desc}>{this.props.data.ReceiverName}</Text>
-                        <Text style={styles.transaction.desc}>{this.props.data.TransactionAmount}</Text>
-                        <Text style={styles.transaction.desc}>{this.props.data.FeeAmount}</Text>
+                        <Text style={styles.transaction.desc}>Sender: {this.props.data.SenderName}</Text>
+                        <Text style={styles.transaction.desc}>Receipient: {this.props.data.ReceiverName}</Text>
                         <Text style={styles.transaction.desc}>{this.props.data.Desc}</Text>
-                        <Text style={styles.transaction.desc}>{this.props.data.Status}</Text>
+                        <Text style={styles.transaction.desc}>Amount: {this.props.data.TransactionAmount}</Text>
+                        <Text style={styles.transaction.desc}>Fee: {this.props.data.FeeAmount}</Text>
                         <Text style={styles.transaction.desc}>{this.timeConverter(this.props.data.Timestamp)}</Text>
 
                         <Button 
