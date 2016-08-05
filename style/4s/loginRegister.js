@@ -1,16 +1,9 @@
 'use strict';
 
 import React, { StyleSheet, Dimensions } from 'react-native';
-let deviceLib = require('./../libs/device');
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
-// Get device
-let deviceC = new deviceLib();
-let device = deviceC.get();
-
-var buttonMarginOffset = (height < 1000) ? -150 : 0;
-var logoMarginOffset = (height < 1000) ? -40 : 0;
 
 module.exports = StyleSheet.create({
     base: {
@@ -25,12 +18,12 @@ module.exports = StyleSheet.create({
     bigLogoWrap: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: buttonMarginOffset,
+        marginBottom: -120,
     },
     bigLogo: {
         resizeMode: 'contain',
-        width: 150,
-        marginTop: logoMarginOffset,
+        width: 100,
+        marginTop: -80,
     },
     smallLogoWrap: {
         alignItems: 'center',
@@ -42,8 +35,8 @@ module.exports = StyleSheet.create({
         width: 80,
     },
     buttonsLoginRegister: {
-        paddingTop: 40,
-        paddingBottom: 40,
+        paddingTop: 20,
+        paddingBottom: 20,
         paddingLeft: 50,
         paddingRight: 50,
         flexDirection: 'column'
@@ -53,16 +46,16 @@ module.exports = StyleSheet.create({
         borderColor: 'black',
         borderStyle: 'solid',
         borderWidth: 1,
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingTop: 5,
+        paddingBottom:5 
     },
     buttonsRegister: {
         flex: 1,
         borderColor: 'black',
         borderStyle: 'solid',
         borderWidth: 1,
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingTop: 5,
+        paddingBottom: 5
     },
     buttonText: {
         textAlign: 'center',

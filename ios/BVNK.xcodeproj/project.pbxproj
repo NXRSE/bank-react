@@ -26,6 +26,7 @@
 		3E18D9AA1D523D6F002CB529 /* ArticulatCF-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3E18D9A91D523D6F002CB529 /* ArticulatCF-Light.otf */; };
 		3E18D9AC1D523D80002CB529 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E18D9AB1D523D80002CB529 /* Berlin.ttf */; };
 		3E18D9AE1D526363002CB529 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E18D9AD1D526363002CB529 /* launch.png */; };
+		3E6DB0941D546590005621DF /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6DB0931D546590005621DF /* DeviceUtil.m */; };
 		67DC2CCFA78A421DA0EC7AE6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE986EF5DDD43808D89E79E /* libz.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A18A8C5ACCAB4B63869263CB /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EBD0FD640A4C97BB6F9F35 /* libRealmReact.a */; };
@@ -161,6 +162,8 @@
 		3E18D9A91D523D6F002CB529 /* ArticulatCF-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ArticulatCF-Light.otf"; path = "../../../../../Design/Type/Articulat 1.4w/OTF/ArticulatCF-Light.otf"; sourceTree = "<group>"; };
 		3E18D9AB1D523D80002CB529 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Berlin.ttf; path = "../../../../../Design/Type/BERLIN-Minimal-Typeface-Web-Font/Berlin.ttf"; sourceTree = "<group>"; };
 		3E18D9AD1D526363002CB529 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../assets/launch.png; sourceTree = "<group>"; };
+		3E6DB0921D546590005621DF /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "../node_modules/react-native-device/DeviceUtil.h"; sourceTree = "<group>"; };
+		3E6DB0931D546590005621DF /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = "../node_modules/react-native-device/DeviceUtil.m"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		95EBD0FD640A4C97BB6F9F35 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 		13B07FAE1A68108700A75B9A /* BVNK */ = {
 			isa = PBXGroup;
 			children = (
+				3E6DB0921D546590005621DF /* DeviceUtil.h */,
+				3E6DB0931D546590005621DF /* DeviceUtil.m */,
 				3E18D9AD1D526363002CB529 /* launch.png */,
 				3E18D9AB1D523D80002CB529 /* Berlin.ttf */,
 				3E18D9A91D523D6F002CB529 /* ArticulatCF-Light.otf */,
@@ -669,6 +674,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E6DB0941D546590005621DF /* DeviceUtil.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -749,7 +755,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kyle Redelinghuys (XZFTG3HJQT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
@@ -764,9 +770,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BVNK;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ea9b07e0-aca6-4e70-a7b7-fa7b292f0d6e";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -775,7 +781,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kyle Redelinghuys (XZFTG3HJQT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -790,9 +796,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BVNK;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ea9b07e0-aca6-4e70-a7b7-fa7b292f0d6e";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
