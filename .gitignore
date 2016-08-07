@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+realm/*
 
 # Android/IJ
 #
@@ -32,13 +33,3 @@ local.properties
 #
 node_modules/
 npm-debug.log
-
-default.realm
-
-default.realm.lock
-
-default.realm.log
-
-default.realm.log_a
-
-default.realm.log_b

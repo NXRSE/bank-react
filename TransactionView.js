@@ -111,7 +111,8 @@ var TransactionView = React.createClass({
 
     render: function() {
 
-        let marker = { latitude: this.props.data.Lat, longitude: this.props.data.Lon };
+        //let marker = { latitude: this.props.data.Lat, longitude: this.props.data.Lon };
+        let marker = { latitude: 37.7749, longitude: -122.4194 };
         console.log(marker);
 
         return (
@@ -124,8 +125,10 @@ var TransactionView = React.createClass({
                         <MapView
                         style={styles.transaction.map}
                         initialRegion={{
-                            latitude: this.props.data.Lat,
-                            longitude: this.props.data.Lon,
+                            //latitude: this.props.data.Lat,
+                            //longitude: this.props.data.Lon,
+                            latitude: 37.7749,
+                            longitude: -122.4194,
                             latitudeDelta: 0.0070,
                             longitudeDelta: 0.0035,
                         }}
@@ -139,8 +142,8 @@ var TransactionView = React.createClass({
                         <Text style={styles.transaction.desc}>Sender: {this.props.data.SenderName}</Text>
                         <Text style={styles.transaction.desc}>Receipient: {this.props.data.ReceiverName}</Text>
                         <Text style={styles.transaction.desc}>{this.props.data.Desc}</Text>
-                        <Text style={styles.transaction.desc}>Amount: {this.props.data.TransactionAmount}</Text>
-                        <Text style={styles.transaction.desc}>Fee: {this.props.data.FeeAmount}</Text>
+                        <Text style={styles.transaction.desc}>Amount: {this.props.data.TransactionAmount.toFixed(4)}</Text>
+                        <Text style={styles.transaction.desc}>Fee: {this.props.data.FeeAmount.toFixed(4)}</Text>
                         <Text style={styles.transaction.desc}>{this.timeConverter(this.props.data.Timestamp)}</Text>
 
                         <Button 
