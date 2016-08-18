@@ -11,9 +11,9 @@ const Realm = require('realm');
 const AccountSchema = {
   name: 'Account',
   properties: {
-    AccountNumber:  { type: 'string' , indexed: true },
-    BankNumber: 'string',
-    AccountHolderName: 'string',
+    AccountNumber:  { type: 'string' , indexed: true, optional: true, default: '' },
+    BankNumber: { type: 'string', optional: true, default: '' },
+    AccountHolderName: { type: 'string', optional: true, default: '' },
     AccountBalance: { type: 'float', optional: true, default: 0 }, // Decimal
     Overdraft: { type: 'float', optional: true, default: 0 },
     AvailableBalance: { type: 'float', optional: true, default: 0 },
@@ -23,7 +23,7 @@ const AccountSchema = {
 const AccountAuthSchema = {
   name: 'AccountAuth',
   properties: {
-    AccountNumber:  { type: 'string', indexed: true },
+    AccountNumber:  { type: 'string', indexed: true, optional: true, default: '' },
     Password: { type: 'string', optional: true, default: '' },
     Timestamp: { type: 'int', optional: true, default: '' },
   }
@@ -82,13 +82,13 @@ const TransactionsSchema = {
 const ContactsSchema = {
   name: 'Contacts',
   properties: {
-    ContactName: { type: 'string', indexed: true },
+    ContactName: { type: 'string', indexed: true, optional: true, default: '' },
     ContactAccountNumber: { type: 'string', optional: true, default: '' },
     ContactBankNumber: { type: 'string', optional: true, default: '' },
     ContactEmailAddress: { type: 'string', optional: true, default: '' },
   }
 };
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 18 });
+let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 20 });
 
 module.exports = realm;

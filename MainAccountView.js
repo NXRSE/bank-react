@@ -67,12 +67,33 @@ var MainAccountView = React.createClass({
                     // Update Main Account
                     let userUpdate = db.objects('Account');
                     var userAccountUpdate = userUpdate.filtered('AccountNumber == $0', userAccountDetails.AccountNumber);
+                    console.log("User from response:");
+                    console.log(userAccountDetails);
+                    console.log("UserAccountNumber from response:");
+                    console.log(userAccountDetails.AccountNumber);
+                    console.log("User from DB:");
+                    console.log(userAccountUpdate);
                     //var userAccountUpdate = userUpdate.slice(0,1).first;
                     if (userAccountUpdate.length == 0) {
                         // @FIXME There are cases where the user stored in the accounts table and the user sent to log in 
                         // are two different users. Find the cause and fix. For now we throw an error and send the user out
                         alert("Account stored in database is not the same as login!");
-                        actions.login({ type: "reset" });
+                        // Delete all other accounts for now
+                        let accounts = db.objects('Account');
+                        db.delete(accounts);
+                        let contacts = db.objects('Contacts');
+                        db.delete(contacts);
+                        let transactions = db.objects('Transactions');
+                        db.delete(transactions);
+                        let auth = db.objects('AccountAuth');
+                        db.delete(auth);
+                        let authToken = db.objects('AccountToken');
+                        db.delete(authToken);
+                        let accountMeta = db.objects('AccountMeta');
+                        db.delete(accountMeta);
+                        let deviceToken = db.objects('DeviceToken');
+                        db.delete(deviceToken);
+                        Actions.login({ type: "reset" });
                         return;
                     }
 

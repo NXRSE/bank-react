@@ -116,6 +116,7 @@ var AddContactView = React.createClass({
 
                     <ListView
                     dataSource={this.state.dataSource}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.global.contactItem}>

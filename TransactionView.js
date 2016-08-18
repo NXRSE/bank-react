@@ -111,8 +111,8 @@ var TransactionView = React.createClass({
 
     render: function() {
 
-        //let marker = { latitude: this.props.data.Lat, longitude: this.props.data.Lon };
-        let marker = { latitude: 37.7749, longitude: -122.4194 };
+        let marker = { latitude: this.props.data.Lat, longitude: this.props.data.Lon };
+        //let marker = { latitude: 37.7749, longitude: -122.4194 };
         console.log(marker);
 
         return (
