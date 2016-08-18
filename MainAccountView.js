@@ -125,6 +125,7 @@ var MainAccountView = React.createClass({
                 let transactionList = res.response;
                 db.write(() => {
                     transactionList.forEach(function(t) { 
+                        console.log(t);
                         // Check if transaction exists
                         let trDB = db.objects('Transactions').filtered('Transaction == $0', t.ID);
 
