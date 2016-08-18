@@ -13,6 +13,7 @@
     "react-native-drawer": "^2.2.6",
     "react-native-keyboard-spacer": "^0.3.0",
     "react-native-maps": "^0.7.1",
+    "react-native-push-notification": "^1.0.7",
     "react-native-router-flux": "^3.2.9",
     "react-native-tabs": "^1.0.5",
     "realm": "^0.11.1"
