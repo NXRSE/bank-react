@@ -6,8 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.22.2",
+    "react": "^15.3.0",
+    "react-native": "^0.30.0",
     "react-native-button": "^1.4.2",
     "react-native-device": "^1.0.1",
     "react-native-drawer": "^2.2.6",

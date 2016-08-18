@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   TextInput,
   View,
