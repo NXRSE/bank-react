@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { 
   AppRegistry,
   Text,
@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   PushNotificationIOS,
   Image,
-  PropTypes,
   AlertIOS
 } from 'react-native';
 

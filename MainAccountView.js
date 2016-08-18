@@ -64,8 +64,6 @@ var MainAccountView = React.createClass({
                 let userAccountDetails = res.response;
 
                 db.write(() => {
-                    console.log('Writing');
-                    console.log(userAccountDetails.AccountNumber);
                     // Update Main Account
                     let userUpdate = db.objects('Account');
                     var userAccountUpdate = userUpdate.filtered('AccountNumber == $0', userAccountDetails.AccountNumber);
@@ -77,16 +75,18 @@ var MainAccountView = React.createClass({
                         actions.login({ type: "reset" });
                         return;
                     }
-                    //userAccountUpdate = userAccountUpdate[0];
-                    console.log(userAccountUpdate);
+
+                    userAccountUpdate = userAccountUpdate[0];
+
+                    let accountBalance = parseFloat(userAccountDetails.AvailableBalance);
+                    let overdraft = parseFloat(userAccountDetails.Overdraft);
+                    let availableBalance = parseFloat(userAccountDetails.AccountBalance);
 
                     userAccountUpdate.AccountHolderName = userAccountDetails.AccountHolderName;
-                    userAccountUpdate.Overdraft = userAccountDetails.Overdraft;
-                    userAccountUpdate.AvailableBalance = userAccountDetails.AvailableBalance;
-                    userAccountUpdate.AccountBalance = userAccountDetails.AccountBalance;
+                    userAccountUpdate.Overdraft = overdraft;
+                    userAccountUpdate.AvailableBalance = availableBalance;
+                    userAccountUpdate.AccountBalance = accountBalance;
 
-                    console.log('After the write');
-                    console.log(userAccountUpdate);
                 });
             } else {
                 Alert.alert('Error', 'Could not update account details: '+res.error);

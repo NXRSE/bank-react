@@ -50,6 +50,7 @@ var MainContactsView = React.createClass({
                     onPress={() => Actions.accountSearch() }>+</Button>
                     <ListView
                     dataSource={this.state.dataSource}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.global.contactItem}>

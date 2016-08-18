@@ -70,9 +70,9 @@ class BVNK extends Component {
 
 	render() {
         return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
-                <Scene key="drawer" component={DrawerView} open={false} >
-                    <Scene key="root" drawerImage={require('./assets/hamburger.png')}>
-                        <Scene key="loginRegister" component={LoginRegisterView} hideNavBar={false}/>
+                <Scene key="drawer" component={DrawerView} open={false} type='replace' >
+                    <Scene key="root" drawerImage={require('./assets/hamburger-sm.png')}>
+                        <Scene key="loginRegister" component={LoginRegisterView} hideNavBar={true} />
                         <Scene key="login" component={LoginView} hideNavBar={false}/>
                         <Scene key="register" component={RegisterView} hideNavBar={false}/>
                         <Scene key="createAuth" component={CreateAuthView} hideNavBar={false}/>

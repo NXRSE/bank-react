@@ -21,7 +21,7 @@ export default class ControlPanel extends Component {
   render() {
     let {closeDrawer} = this.props
     return (
-    <Image source={require('./assets/control-panel.png')} style={styles.main.backgroundImage}>
+    <Image source={require('./assets/control-panel.png')} style={styles.controlPanel.backgroundImage}>
           <ScrollView style={styles.container}>
             <Button containerStyle={styles.controlPanel.exitContainer} style={styles.controlPanel.exit}
             onPress={closeDrawer}>

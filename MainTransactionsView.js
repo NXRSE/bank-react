@@ -129,6 +129,7 @@ var MainTransactionsView = React.createClass({
                     <Text style={styles.global.heading}>TRANSACTIONS</Text>
                     <ListView
                     dataSource={this.state.dataSource}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.transaction.container}>

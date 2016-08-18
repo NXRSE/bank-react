@@ -125,10 +125,10 @@ var TransactionView = React.createClass({
                         <MapView
                         style={styles.transaction.map}
                         initialRegion={{
-                            //latitude: this.props.data.Lat,
-                            //longitude: this.props.data.Lon,
-                            latitude: 37.7749,
-                            longitude: -122.4194,
+                            latitude: this.props.data.Lat,
+                            longitude: this.props.data.Lon,
+                            //latitude: 37.7749,
+                            //longitude: -122.4194,
                             latitudeDelta: 0.0070,
                             longitudeDelta: 0.0035,
                         }}

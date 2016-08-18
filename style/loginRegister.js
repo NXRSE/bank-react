@@ -21,7 +21,8 @@ module.exports = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
-        width: width
+        width: width,
+        height: height,
     },
     bigLogoWrap: {
         alignItems: 'center',

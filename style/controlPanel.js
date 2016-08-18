@@ -1,9 +1,18 @@
 'use strict';
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
 
 module.exports = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        width: width,
+        height: height,
+    },
     containerFilled: {
         padding:10, 
         height:45, 

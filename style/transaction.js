@@ -30,7 +30,7 @@ module.exports = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         // @FIXME Find element that is forcing negative margins
-        marginTop: -250,
+        marginTop: -950,
     },
     desc: {
         textAlign: 'left',
@@ -52,8 +52,8 @@ module.exports = StyleSheet.create({
     },
     map: {
         alignItems: 'center',
-        height: 200,
+        height: 300,
         width: width,
-        flex: 1,
+        flex: 0,
     },
 });
