@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -39,7 +39,7 @@ var MainPaymentDepositView = React.createClass({
                 var initialPosition = JSON.stringify(position); 
                 this.setState({initialPosition});
             }, 
-            (error) => alert(error.message), 
+            (error) => console.log(error.message), 
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000} 
         ); 
         

@@ -1,6 +1,5 @@
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   ScrollView,
   StyleSheet,
   Text,
@@ -22,7 +21,7 @@ export default class ControlPanel extends Component {
   render() {
     let {closeDrawer} = this.props
     return (
-    <Image source={require('./assets/control-panel.png')} style={styles.main.backgroundImage}>
+    <Image source={require('./assets/control-panel.png')} style={styles.controlPanel.backgroundImage}>
           <ScrollView style={styles.container}>
             <Button containerStyle={styles.controlPanel.exitContainer} style={styles.controlPanel.exit}
             onPress={closeDrawer}>
@@ -38,7 +37,7 @@ export default class ControlPanel extends Component {
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
             onPress={()=>Actions.paymentDeposit({type : "reset"})}>DEPOSIT</Button>
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
-            onPress={()=>Actions.settings({type : "reset", open: false})}>SETTINGS</Button>
+            onPress={()=>Actions.about({type : "reset", open: false})}>ABOUT</Button>
             <Button containerStyle={styles.controlPanel.containerBase} style={styles.controlPanel.base}
             onPress={()=>Actions.loginRegister({type : "reset", open: false})}>LOG OUT</Button>
           </ScrollView>

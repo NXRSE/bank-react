@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -66,26 +66,27 @@ PushNotification.configure({
     requestPermissions: true,
 });
 
-class BankReact extends Component {
+class BVNK extends Component {
 
 	render() {
         return <Router navigationBarStyle={styles.navbar.base} titleStyle={styles.navbar.title} barButtonTextStyle={styles.navbar.buttonText} barButtonIconStyle={styles.navbar.buttonIcon}>
-                <Scene key="drawer" component={DrawerView} open={false} >
-                    <Scene key="root" drawerImage={require('./assets/hamburger.png')}>
-                        <Scene key="loginRegister" component={LoginRegisterView} hideNavBar={true}/>
-                        <Scene key="login" component={LoginView}/>
-                        <Scene key="register" component={RegisterView}/>
-                        <Scene key="createAuth" component={CreateAuthView}/>
-                        <Scene key="main" component={MainAccountView}/>
-                        <Scene key="contact" component={ContactView}/>
-                        <Scene key="paymentContactsList" component={MainContactsView}/>
-                        <Scene key="paymentCredit" component={MainPaymentCreditView}/>
-                        <Scene key="paymentDeposit" component={MainPaymentDepositView}/>
-                        <Scene key="settings" component={MainSettingsView}/>
-                        <Scene key="transaction" component={TransactionView}/>
-                        <Scene key="transactionList" component={MainTransactionView}/>
-                        <Scene key="accountSearch" component={AddContactView}/>
-                        <Scene key="accountFetch" component={FetchAccountView}/>
+                <Scene key="drawer" component={DrawerView} open={false} type='replace' >
+                    <Scene key="root" drawerImage={require('./assets/hamburger-sm.png')}>
+                        <Scene key="loginRegister" component={LoginRegisterView} hideNavBar={true} />
+                        <Scene key="login" component={LoginView} hideNavBar={false}/>
+                        <Scene key="register" component={RegisterView} hideNavBar={false}/>
+                        <Scene key="createAuth" component={CreateAuthView} hideNavBar={false}/>
+                        <Scene key="main" component={MainAccountView} hideNavBar={false}/>
+                        <Scene key="contact" component={ContactView} hideNavBar={false}/>
+                        <Scene key="paymentContactsList" component={MainContactsView} hideNavBar={false}/>
+                        <Scene key="paymentCredit" component={MainPaymentCreditView} hideNavBar={false}/>
+                        <Scene key="paymentDeposit" component={MainPaymentDepositView} hideNavBar={false}/>
+                        <Scene key="settings" component={MainSettingsView} hideNavBar={false}/>
+                        <Scene key="transaction" component={TransactionView} hideNavBar={false}/>
+                        <Scene key="transactionList" component={MainTransactionView} hideNavBar={false}/>
+                        <Scene key="accountSearch" component={AddContactView} hideNavBar={false}/>
+                        <Scene key="accountFetch" component={FetchAccountView} hideNavBar={false}/>
+                        <Scene key="about" component={MainAboutView} hideNavBar={false}/>
                     </Scene>
                 </Scene>
         </Router>
@@ -109,9 +110,10 @@ var TransactionView = require('./TransactionView');
 var MainTransactionView = require('./MainTransactionsView');
 var AddContactView = require('./AddContactView');
 var FetchAccountView = require('./FetchAccountView');
+var MainAboutView = require('./MainAboutView');
 
 // DB
 var db = require('./libs/RealmDB');
 //console.log(db.path);
 
-AppRegistry.registerComponent('BankReact', () => BankReact);
+AppRegistry.registerComponent('BVNK', () => BVNK);

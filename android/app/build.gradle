@@ -120,6 +120,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-push-notification')
     compile project(':react-native-maps')
     compile project(':realm')
     compile fileTree(dir: "libs", include: ["*.jar"])

@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -129,6 +129,7 @@ var MainTransactionsView = React.createClass({
                     <Text style={styles.global.heading}>TRANSACTIONS</Text>
                     <ListView
                     dataSource={this.state.dataSource}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.transaction.container}>

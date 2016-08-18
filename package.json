@@ -1,18 +1,23 @@
 {
   "name": "BVNK",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.22.2",
+    "react": "~15.2.1",
+    "react-addons-pure-render-mixin": "~15.2.1",
+    "react-native": "~0.31.0",
     "react-native-button": "^1.4.2",
+    "react-native-device": "^1.0.1",
     "react-native-drawer": "^2.2.6",
     "react-native-maps": "^0.7.1",
-    "react-native-router-flux": "^3.2.9",
-    "react-native-tabs": "^1.0.5",
-    "realm": "^0.11.1"
+    "react-native-push-notification": "2.0.2",
+    "react-native-router-flux": "^3.3.4",
+    "realm": "^0.14.0"
+  },
+  "devDependencies": {
+    "rnpm-plugin-upgrade": "^0.26.0"
   }
 }

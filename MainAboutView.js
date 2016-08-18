@@ -24,7 +24,7 @@ let bc = new BankClient();
 let db = require('./libs/RealmDB');  
 let dismissKeyboard = require('dismissKeyboard');
 
-var MainSettingsView = React.createClass({
+var MainAboutView = React.createClass({
     render: function() {
         return(
             <Image source={require('./assets/bg-blur.png')} style={styles.main.backgroundImage}>
@@ -33,7 +33,10 @@ var MainSettingsView = React.createClass({
                     <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                 </View>
                   <View style={styles.global.wrap}>
-                    <Text style={styles.global.heading}>SETTINGS</Text>
+                    <Text style={styles.global.heading}>ABOUT</Text>
+                    <Text style={styles.global.aboutText}>BVNK is a project to build core banking infrastructure using modern standards. To find out more, go to https://bvnk.co.</Text>
+                    <Text style={styles.global.aboutText}>All code is available on Github at https://github.com/BVNK</Text>
+                    <Text style={styles.global.aboutText}>Feel free to get in touch at hello@bvnk.co</Text>
                   </View>
             </View>
             </Image>
@@ -41,5 +44,5 @@ var MainSettingsView = React.createClass({
     }
 });
 
-module.exports = MainSettingsView;
+module.exports = MainAboutView;
 

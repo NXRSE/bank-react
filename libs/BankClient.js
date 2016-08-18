@@ -12,15 +12,17 @@ import React, {
 } from 'react-native';
 
 let db = require('./RealmDB');  
+import {Scene, Router, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
 // @TODO Local testing
 const url = 'https://thebankoftoday.com:8443';
-//const url = 'https://thebankoftoday.com/';
+//const url = 'https://bvnk.co:8443/';
 
 //var BankClient = React.createClass({
 function BankClient() { 
 
     this._doCallNoAuthGet = function(route, method, callback) {
+        console.log('Route: noauth get :'+url+route);
 		fetch(url+route, {
 		  method: method,
 		  headers: {
@@ -39,6 +41,7 @@ function BankClient() {
     },
 
     this._doCallNoAuth = function(route, method, data, callback) {
+        console.log('Route: noauth post :'+url+route);
 		var formData = new FormData();
 		for ( var key in data ) {
 			formData.append(key, data[key]);
@@ -64,6 +67,7 @@ function BankClient() {
     },
 
     this._doCallAuthGet = function(route, method, token, callback) {
+        console.log('Route: auth get :'+url+route);
 		return fetch(url+route, {
 		  method: method,
 		  headers: {
@@ -82,6 +86,7 @@ function BankClient() {
     },
 
     this._doCallAuth = function(route, method, data, token, callback) {
+        console.log('Route: auth post :'+url+route);
 		var formData = new FormData();
 		for ( var key in data ) {
 			formData.append(key, data[key]);
@@ -213,7 +218,7 @@ function BankClient() {
             console.log(token);
 
             // Check token
-            //this.authExtend(token, this.extendTokenInBackground);
+            this.authExtend(token, this.extendTokenInBackground);
             // Return
             console.log("After extend: "+token);
             return token;
@@ -221,11 +226,13 @@ function BankClient() {
     },
 
     this.extendTokenInBackground = function(res) {
-        console.log("getting to extend");
-        console.log(res);
 
         if (typeof res.error != 'undefined') {
             if (res.error == 'httpApiHandlers: Token invalid') {
+                Actions.login({ type : "reset" });
+                console.log("Token invalid, go to login");
+                return;
+                /*
                 console.log("token invalid");
                 let userAuth = db.objects('AccountAuth');
                 if (userAuth.length > 0) {
@@ -262,6 +269,7 @@ function BankClient() {
                         }
                     });
                 }
+                */
             }
         }
     }

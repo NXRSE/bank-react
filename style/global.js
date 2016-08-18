@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 module.exports = StyleSheet.create({
     container: {
@@ -132,6 +133,15 @@ module.exports = StyleSheet.create({
         marginLeft: 20,
         paddingTop: 5,
         paddingBottom: 15,
+    },
+    aboutText: {
+        textAlign: 'center',
+        backgroundColor: 'transparent',
+        fontFamily: 'ArticulatCF-Light',
+        fontSize: 25,
+        color: 'white',
+        marginLeft: 10,
+        marginTop: 20,
     },
 });
 

@@ -1,8 +1,7 @@
 'use strict';
 
-import React, { 
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -13,6 +12,8 @@ import React, {
   ListView,
   Alert
 } from 'react-native';
+
+import React, { Component } from 'react';
 
 import Button from 'react-native-button'
 import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
@@ -109,9 +110,9 @@ var AddContactView = React.createClass({
                         autoCorrect={false}
                         placeholder="Email, ID or Name"
                     />
-                    {notificationMessage}
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
                     onPress={ this._doSearch }>SEARCH</Button>
+                    {notificationMessage}
 
                     <ListView
                     dataSource={this.state.dataSource}

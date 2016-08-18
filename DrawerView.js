@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component, PropTypes } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -11,7 +11,6 @@ import React, {
   TouchableOpacity,
   PushNotificationIOS,
   Image,
-  PropTypes,
   AlertIOS
 } from 'react-native';
 
@@ -28,6 +27,7 @@ class DrawerView extends Component {
 	state = {
 		drawerOpen: false,
 		drawerDisabled: false,
+        side: 'left',
 	};
 
 	closeDrawer = () => {
@@ -67,12 +67,15 @@ class DrawerView extends Component {
 			openDrawerOffset={(viewport) => {
 			  return 0
 			}}
-			closedDrawerOffset={() => 0}
+			closedDrawerOffset={(viewport) => {
+			  return 0
+			}}
 			panOpenMask={0.2}
             tweenHandler={(ratio) => ({
                 mainOverlay: { opacity:(2-ratio)/2 }
             })}
 			negotiatePan
+            side={'left'}
 			>
 				<DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
 			</Drawer>
@@ -121,6 +124,7 @@ var drawerStyles = {
         shadowColor: "#000000",
         shadowOpacity: 0.2,
         shadowRadius: 0,
+        marginRight: 100,
     },
     
     main: {

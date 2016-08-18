@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { 
+import React, { Component } from 'react';
+import { 
   AppRegistry,
-  Component,
   Text,
   View,
   StatusBar,
@@ -50,6 +50,7 @@ var MainContactsView = React.createClass({
                     onPress={() => Actions.accountSearch() }>+</Button>
                     <ListView
                     dataSource={this.state.dataSource}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.global.contactItem}>
