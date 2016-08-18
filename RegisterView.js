@@ -9,7 +9,6 @@ import {
   StatusBar,
   StyleSheet,
   Image,
-  KeyboardAvoidingView,
   Alert
 } from 'react-native';
 
@@ -116,7 +115,6 @@ var RegisterView = React.createClass({
                     <View style={styles.landingPage.smallLogoWrap}>
                         <Image source={require('./assets/logo-sm.png')} style={styles.landingPage.smallLogo} />
                     </View>
-                  <KeyboardAvoidingView style={styles.global.wrap}>
                     <TextInput
                         style={styles.forms.inputText}
                         onChangeText={(givenName) => this.setState({givenName})}
@@ -150,7 +148,6 @@ var RegisterView = React.createClass({
                     />
                     <Button containerStyle={styles.buttons.containerFilled} style={styles.buttons.base}
                     onPress={ this._doRegister }>REGISTER</Button>
-                  </KeyboardAvoidingView>
               </Image>
             </View>
         )

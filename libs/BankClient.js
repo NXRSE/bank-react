@@ -15,8 +15,8 @@ let db = require('./RealmDB');
 import {Scene, Router, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
 // @TODO Local testing
-//const url = 'https://bvnk.co:8443';
-const url = 'https://thebankoftoday.com/';
+const url = 'https://thebankoftoday.com:8443/';
+//const url = 'https://bvnk.co:8443/';
 
 //var BankClient = React.createClass({
 function BankClient() { 

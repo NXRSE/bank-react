@@ -1,13 +1,14 @@
 'use strict';
 
-import React, { StyleSheet, Dimensions } from 'react-native';
-let deviceLib = require('./../libs/device');
+import React from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
+//let deviceLib = require('./../libs/device');
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 // Get device
-let deviceC = new deviceLib();
-let device = deviceC.get();
+//let deviceC = new deviceLib();
+//let device = deviceC.get();
 
 var buttonMarginOffset = (height < 1000) ? -150 : 0;
 var logoMarginOffset = (height < 1000) ? -40 : 0;
