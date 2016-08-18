@@ -15,13 +15,14 @@ let db = require('./RealmDB');
 import {Scene, Router, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
 
 // @TODO Local testing
-const url = 'https://thebankoftoday.com:8443/';
+const url = 'https://thebankoftoday.com:8443';
 //const url = 'https://bvnk.co:8443/';
 
 //var BankClient = React.createClass({
 function BankClient() { 
 
     this._doCallNoAuthGet = function(route, method, callback) {
+        console.log('Route: noauth get :'+url+route);
 		fetch(url+route, {
 		  method: method,
 		  headers: {
@@ -40,6 +41,7 @@ function BankClient() {
     },
 
     this._doCallNoAuth = function(route, method, data, callback) {
+        console.log('Route: noauth post :'+url+route);
 		var formData = new FormData();
 		for ( var key in data ) {
 			formData.append(key, data[key]);
@@ -65,6 +67,7 @@ function BankClient() {
     },
 
     this._doCallAuthGet = function(route, method, token, callback) {
+        console.log('Route: auth get :'+url+route);
 		return fetch(url+route, {
 		  method: method,
 		  headers: {
@@ -83,6 +86,7 @@ function BankClient() {
     },
 
     this._doCallAuth = function(route, method, data, token, callback) {
+        console.log('Route: auth post :'+url+route);
 		var formData = new FormData();
 		for ( var key in data ) {
 			formData.append(key, data[key]);

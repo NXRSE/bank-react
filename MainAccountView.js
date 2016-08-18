@@ -61,7 +61,7 @@ var MainAccountView = React.createClass({
         let res = bc.accountGet(data, function(res) {
             if (typeof res.error == 'undefined') {
                 console.log(res.response);
-                let userAccountDetails = JSON.parse(res.response);
+                let userAccountDetails = res.response;
 
                 db.write(() => {
                     console.log('Writing');
@@ -77,7 +77,7 @@ var MainAccountView = React.createClass({
                         actions.login({ type: "reset" });
                         return;
                     }
-                    userAccountUpdate = userAccountUpdate[0];
+                    //userAccountUpdate = userAccountUpdate[0];
                     console.log(userAccountUpdate);
 
                     userAccountUpdate.AccountHolderName = userAccountDetails.AccountHolderName;
@@ -117,8 +117,10 @@ var MainAccountView = React.createClass({
             page : 0,
             timestamp : timestamp
         };
+        console.log(data);
 
         let res = bc.transactionsListAfterTimestamp(data, function(res) {
+            console.log("After transactions...");
             if (typeof res.error == 'undefined') {
                 let transactionList = res.response;
                 db.write(() => {
@@ -140,6 +142,9 @@ var MainAccountView = React.createClass({
                                 senderName = contact[0].ContactName;
                             }
 
+                            let transactionAmount = parseFloat(t.Amount);
+                            let feeAmount = parseFloat(t.Fee);
+
                             db.create('Transactions', { 
                                 Transaction: t.ID,
                                 Type: t.PainType,
@@ -147,10 +152,10 @@ var MainAccountView = React.createClass({
                                 SenderBankNumber: t.Sender.BankNumber,
                                 ReceiverAccountNumber: t.Receiver.AccountNumber,
                                 ReceiverBankNumber: t.Receiver.BankNumber,
-                                TransactionAmount: t.Amount,
+                                TransactionAmount: transactionAmount,
                                 SenderName: senderName,
                                 ReceiverName: receiverName,
-                                FeeAmount: t.Fee,
+                                FeeAmount: feeAmount,
                                 Lat: t.Geo[0],
                                 Lon: t.Geo[1],
                                 Desc: t.Desc,
@@ -249,6 +254,7 @@ var MainAccountView = React.createClass({
                     <ListView
                     dataSource={this.state.dataSource}
                     style={styles.transaction.list}
+                    enableEmptySections={true}
                     renderRow={(rowData) => 
                     <View
                     style={styles.transaction.container}>
