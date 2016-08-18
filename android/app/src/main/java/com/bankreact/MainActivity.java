@@ -2,6 +2,7 @@ package com.bankreact;
 
 import com.facebook.react.ReactActivity;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import io.realm.react.RealmReactPackage;
 import com.facebook.react.ReactPackage;
@@ -38,6 +39,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new ReactNativePushNotificationPackage(this),
             new ReactNativePushNotificationPackage(this),
             new MapsPackage(),
             new RealmReactPackage()
