@@ -21,6 +21,58 @@ let bc = new BankClient();
 let db = require('./libs/RealmDB');  
 let dismissKeyboard = require('dismissKeyboard');
 
+let PushNotification = require('react-native-push-notification');
+
+PushNotification.configure({
+
+    // (optional) Called when Token is generated (iOS and Android)
+    onRegister: function(token) {
+		let tokenString = token.token;
+        console.log( 'TOKEN:', tokenString );
+
+        if (typeof tokenString != undefined) {
+            // Save in database
+            db.write(() => {
+                // Delete tokens
+                let allTokens = db.objects('DeviceToken');
+                db.delete(allTokens); 
+
+                db.create('DeviceToken', { 
+                   Token: tokenString,
+                   Platform: "ios"
+                });
+            });
+        }
+    },
+
+    // (required) Called when a remote or local notification is opened or received
+    onNotification: function(notification) {
+        console.log( 'NOTIFICATION:', notification );
+        alert(notification.message);
+    },
+
+    // ANDROID ONLY: (optional) GCM Sender ID.
+    senderID: "YOUR GCM SENDER ID",
+
+    // IOS ONLY (optional): default: all - Permissions to register.
+    permissions: {
+        alert: true,
+        badge: true,
+        sound: true
+    },
+
+    // Should the initial notification be popped automatically
+    // default: true
+    popInitialNotification: true,
+
+    /**
+      * IOS ONLY: (optional) default: true
+      * - Specified if permissions will requested or not,
+      * - if not, you must call PushNotificationsHandler.requestPermissions() later
+      */
+    requestPermissions: true,
+});
+
 var LoginView = React.createClass({
     getInitialState() {
         dismissKeyboard();
@@ -137,6 +189,8 @@ var LoginView = React.createClass({
         // Fetch token 
         // * @FIXME This is currently throwing "Error: Object type 'DeviceToken' not present in Realm"
         let pushTokenObj = db.objects('DeviceToken');
+        console.log('Push token:');
+        console.log(pushTokenObj);
         if (pushTokenObj.length > 0) {
             var pushTokenArr = pushTokenObj.slice(0,1);
             let pushToken = pushTokenArr[0];
@@ -148,6 +202,13 @@ var LoginView = React.createClass({
             bc.addPushToken(data, () => {
                 console.log("push token added");
             });
+        } else {
+            console.log("No token, get the token");
+            PushNotification.checkPermissions(function(res) {
+                console.log(res);
+            });
+            PushNotification.abandonPermissions();
+            PushNotification.requestPermissions();
         }
     },
 

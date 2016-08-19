@@ -12,59 +12,8 @@ import {
 } from 'react-native';
 
 import {Actions, Scene, Router, TabBar} from 'react-native-router-flux';
-let PushNotification = require('react-native-push-notification');
 
 StatusBar.setBarStyle('light-content');
-
-PushNotification.configure({
-
-    // (optional) Called when Token is generated (iOS and Android)
-    onRegister: function(token) {
-		let tokenString = token.token;
-		//let tokenString = "test-token-string-ios";
-        console.log( 'TOKEN:', tokenString );
-
-        if (typeof tokenString != undefined) {
-            // Save in database
-            db.write(() => {
-                // Delete tokens
-                let allTokens = db.objects('DeviceToken');
-                db.delete(allTokens); 
-
-                db.create('DeviceToken', { 
-                   Token: tokenString,
-                   Platform: "ios"
-                });
-            });
-        }
-    },
-
-    // (required) Called when a remote or local notification is opened or received
-    onNotification: function(notification) {
-        console.log( 'NOTIFICATION:', notification );
-    },
-
-    // ANDROID ONLY: (optional) GCM Sender ID.
-    senderID: "YOUR GCM SENDER ID",
-
-    // IOS ONLY (optional): default: all - Permissions to register.
-    permissions: {
-        alert: true,
-        badge: true,
-        sound: true
-    },
-
-    // Should the initial notification be popped automatically
-    // default: true
-    popInitialNotification: true,
-
-    /**
-      * IOS ONLY: (optional) default: true
-      * - Specified if permissions will requested or not,
-      * - if not, you must call PushNotificationsHandler.requestPermissions() later
-      */
-    requestPermissions: true,
-});
 
 class BVNK extends Component {
 

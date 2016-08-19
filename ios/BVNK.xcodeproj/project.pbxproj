@@ -27,7 +27,6 @@
 		3E18D9AC1D523D80002CB529 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E18D9AB1D523D80002CB529 /* Berlin.ttf */; };
 		3E18D9AE1D526363002CB529 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E18D9AD1D526363002CB529 /* launch.png */; };
 		3E6DB0941D546590005621DF /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6DB0931D546590005621DF /* DeviceUtil.m */; };
-		3EE9DAA91D66121A008C6384 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE9DAA81D66121A008C6384 /* GameKit.framework */; };
 		67DC2CCFA78A421DA0EC7AE6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE986EF5DDD43808D89E79E /* libz.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A18A8C5ACCAB4B63869263CB /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EBD0FD640A4C97BB6F9F35 /* libRealmReact.a */; };
@@ -165,7 +164,6 @@
 		3E18D9AD1D526363002CB529 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = launch.png; path = ../assets/launch.png; sourceTree = "<group>"; };
 		3E6DB0921D546590005621DF /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = "../node_modules/react-native-device/DeviceUtil.h"; sourceTree = "<group>"; };
 		3E6DB0931D546590005621DF /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = "../node_modules/react-native-device/DeviceUtil.m"; sourceTree = "<group>"; };
-		3EE9DAA81D66121A008C6384 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		3EE9DAAA1D66123B008C6384 /* BVNK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = BVNK.entitlements; path = BVNK/BVNK.entitlements; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				A18A8C5ACCAB4B63869263CB /* libRealmReact.a in Frameworks */,
 				D9EFDEAD2B624CB78D4821B6 /* libc++.tbd in Frameworks */,
 				67DC2CCFA78A421DA0EC7AE6 /* libz.tbd in Frameworks */,
-				3EE9DAA91D66121A008C6384 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +393,6 @@
 		E3C28CEF353648D3820EAC91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3EE9DAA81D66121A008C6384 /* GameKit.framework */,
 				AB50FDF42AE345119128EA74 /* libc++.tbd */,
 				EFE986EF5DDD43808D89E79E /* libz.tbd */,
 			);
@@ -459,7 +455,7 @@
 						DevelopmentTeam = XZFTG3HJQT;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -468,10 +464,10 @@
 								enabled = 0;
 							};
 							com.apple.OMC = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -786,9 +782,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = BVNK/BVNK.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kyle Redelinghuys (M484F68P27)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kyle Redelinghuys (M484F68P27)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -808,7 +804,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "co.bvnk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = BVNK;
-				PROVISIONING_PROFILE = "ea9b07e0-aca6-4e70-a7b7-fa7b292f0d6e";
+				PROVISIONING_PROFILE = "7973c0d1-769c-4c46-8f05-2c2eed8ee9cd";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = NO;
 			};
@@ -819,7 +815,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = BVNK/BVNK.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kyle Redelinghuys (M484F68P27)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kyle Redelinghuys (M484F68P27)";
 				DEAD_CODE_STRIPPING = NO;
@@ -842,7 +838,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "co.bvnk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = BVNK;
-				PROVISIONING_PROFILE = "ea9b07e0-aca6-4e70-a7b7-fa7b292f0d6e";
+				PROVISIONING_PROFILE = "7973c0d1-769c-4c46-8f05-2c2eed8ee9cd";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
