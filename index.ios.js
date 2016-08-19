@@ -36,6 +36,7 @@ class BVNK extends Component {
                         <Scene key="accountSearch" component={AddContactView} hideNavBar={false}/>
                         <Scene key="accountFetch" component={FetchAccountView} hideNavBar={false}/>
                         <Scene key="about" component={MainAboutView} hideNavBar={false}/>
+                        <Scene key="notifications" component={MainNotificationView} hideNavBar={false}/>
                     </Scene>
                 </Scene>
         </Router>
@@ -60,6 +61,7 @@ var MainTransactionView = require('./MainTransactionsView');
 var AddContactView = require('./AddContactView');
 var FetchAccountView = require('./FetchAccountView');
 var MainAboutView = require('./MainAboutView');
+var MainNotificationView = require('./MainNotificationView');
 
 // DB
 var db = require('./libs/RealmDB');

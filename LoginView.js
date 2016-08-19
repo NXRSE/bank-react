@@ -48,7 +48,23 @@ PushNotification.configure({
     // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
         console.log( 'NOTIFICATION:', notification );
-        alert(notification.message);
+        if (!Date.now) {
+            Date.now = function() { return new Date().getTime(); }
+        }
+        // Add notification to db
+        db.write(() => {
+            db.create('Notification', { 
+               Type: notification.type,
+               Message: notification.message,
+               Status: 'unread',
+               Timestamp: Math.floor(Date.now() / 1000),
+            });
+        });
+
+        let unreadCount = db.objects('Notifications').filter("Status == 'unread'").length;
+        PushNotification.setApplicationIconBadgeNumber(unreadCount);
+
+        alert("New notification: "+unreadCount);
     },
 
     // ANDROID ONLY: (optional) GCM Sender ID.

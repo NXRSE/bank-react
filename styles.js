@@ -12,6 +12,7 @@ module.exports = {
     tabs: require('./style/tabs'),
     controlPanel: require('./style/controlPanel'),
     transaction: require('./style/transaction'),
+    notification: require('./style/notification'),
 };
 
 /*

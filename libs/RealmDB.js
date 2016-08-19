@@ -88,7 +88,27 @@ const ContactsSchema = {
     ContactEmailAddress: { type: 'string', optional: true, default: '' },
   }
 };
+const NotificationsSchema = {
+  // @TODO These properties may increase with Android later
+  name: 'Notifications',
+  properties: {
+    id: 'int', 
+    Type: { type: 'string', optional: true, default: '' },
+    Message: { type: 'string', optional: true, default: '' },
+    Status: { type: 'string', optional: true, default: '' },
+    Timestamp: { type: 'int', optional: true, default: 0 },
+  }
+};
 
-let realm = new Realm({ schema: [ AccountSchema, AccountMetaSchema, AccountAuthSchema, AccountTokenSchema, DeviceTokenSchema, TransactionsSchema, ContactsSchema ], schemaVersion: 20 });
+let realm = new Realm({ schema: [ 
+    AccountSchema, 
+    AccountMetaSchema, 
+    AccountAuthSchema, 
+    AccountTokenSchema, 
+    DeviceTokenSchema, 
+    TransactionsSchema, 
+    ContactsSchema,
+    NotificationsSchema
+], schemaVersion: 21 });
 
 module.exports = realm;

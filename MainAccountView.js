@@ -23,8 +23,6 @@ let bc = new BankClient();
 let db = require('./libs/RealmDB');  
 let dismissKeyboard = require('dismissKeyboard');
 
-let PushNotification = require('react-native-push-notification');
-
 var MainAccountView = React.createClass({
     getInitialState() {
         console.log('create db:', db.path)
@@ -219,8 +217,6 @@ var MainAccountView = React.createClass({
 
 	componentWillMount: function() {
         this.getInitialBalance();
-        // Clear notification count
-        PushNotification.setApplicationIconBadgeNumber(0);
     },
 
 	componentDidMount: function() {
